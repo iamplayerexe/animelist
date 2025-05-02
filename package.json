@@ -29,8 +29,8 @@
     "@electron-forge/plugin-fuses": "^7.8.0",
     "@electron-forge/publisher-github": "^7.8.0",
     "@electron/fuses": "^1.8.0",
+    "dotenv": "^16.5.0",
     "electron": "26.6.10",
-    "electron-packager": "17.1.2",
-    "dotenv": "^16.5.0"
+    "electron-packager": "17.1.2"
   }
 }
