@@ -1,4 +1,4 @@
-const ALLOWED_SEASON_TYPES = ['Season', 'OVA', 'Movie', 'Special', 'Scan', 'Non-Canon'];
+const ALLOWED_SEASON_TYPES = ['Season', 'OAV', 'Movie', 'Special', 'Scan', 'Non-Canon'];
 const DEFAULT_SEASON_TYPE = 'Season';
 
 module.exports = {

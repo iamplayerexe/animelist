@@ -108,7 +108,7 @@ async function showManualAddDialog() {
                 switch (selectedType) {
                     case 'Season': numberLabelKey = 'swalAddSeasonNumberLabel'; numberRequired = true; numberMin = "1"; episodesDisabled = false; if (episodesInput.disabled) episodesValue = ''; break;
                     case 'Movie': numberLabelKey = 'swalAddMovieNumberLabel'; numberRequired = false; numberMin = "0"; episodesDisabled = true; episodesValue = "1"; break;
-                    case 'OVA': numberLabelKey = 'swalAddOVANumberLabel'; numberRequired = false; numberMin = "0"; episodesDisabled = false; if (episodesInput.disabled) episodesValue = ''; break;
+                    case 'OAV': numberLabelKey = 'swalAddOAVNumberLabel'; numberRequired = false; numberMin = "0"; episodesDisabled = false; if (episodesInput.disabled) episodesValue = ''; break;
                     case 'Special': numberLabelKey = 'swalAddSpecialNumberLabel'; numberRequired = false; numberMin = "0"; episodesDisabled = false; if (episodesInput.disabled) episodesValue = ''; break;
                     case 'Scan': numberLabelKey = 'swalAddScanNumberLabel'; numberRequired = false; numberMin = "0"; episodesDisabled = false; if (episodesInput.disabled) episodesValue = ''; break;
                     case 'Non-Canon': numberLabelKey = 'swalAddNonCanonNumberLabel'; numberRequired = false; numberMin = "0"; episodesDisabled = false; if (episodesInput.disabled) episodesValue = ''; break;

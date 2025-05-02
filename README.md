@@ -18,7 +18,7 @@
   <a href="https://github.com/iamplayerexe/animelist/releases"><img src="https://img.shields.io/github/v/release/iamplayerexe/animelist?style=for-the-badge" alt="Latest Release"></a>
 </p>
 
-> A simple, **offline-first** desktop application built with Electron for managing your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OVAs, specials, and more. Designed for Windows.
+> A simple, **offline-first** desktop application built with Electron for managing your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, specials, and more. Designed for Windows.
 
 ---
 
@@ -43,7 +43,7 @@
   <br/>
   <div align="center">
 
-  *Filtering by "Completed" Status and "OVA" Type:*<br/>
+  *Filtering by "Completed" Status and "OAV" Type:*<br/>
   <img src="https://cdn.discordapp.com/attachments/1037490342062207046/1364892800088408104/secondgifRaliseavecClipchamp-ezgif.com-video-to-gif-converter.gif?ex=680b52fa&is=680a017a&hm=c23eec476a7e9cac7aad99942c8b938f9f48010cb5d598906e289412713f1b6c&" alt="Screenshot showing Filtering">
   <br/><br/>
   *Data Management: Export:*<br/>
@@ -72,7 +72,7 @@
 -   [x] 🎨 **Automatic Cover Art:** Fetches cover art from Jikan API.
 -   [x] 🖼️ **Custom Cover Art:** Option to use your own image URL.
 -   [x] 📊 **Status Tracking:** Set status (Watching, Completed, etc.) via card dropdowns.
--   [x] 🔢 **Progress Tracking:** Use `+`/`-` for episode counts (Series/OVAs) or toggle Watched (Movies).
+-   [x] 🔢 **Progress Tracking:** Use `+`/`-` for episode counts (Series/OAVs) or toggle Watched (Movies).
 -   [x] ℹ️ **Detailed View:** Popup with full details per anime.
 -   [x] 🔍 **Filtering:** Sidebar filters for **Status** (buttons) and **Type** (dropdown).
 -   [x] 🌐 **Multi-language:** Supports 20 languages via sidebar dropdown.
