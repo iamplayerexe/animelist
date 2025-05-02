@@ -1,3 +1,4 @@
+<!-- <-- comment (.md file)(README.md) -->
 <div align="center">
 
 # Anime List 📺
@@ -82,6 +83,7 @@
 -   [x] 🌐 **Multi-language:** Supports 20 languages via sidebar dropdown.
 -   [x] 💾 **Data Management:** Import/Export (`.json`) & Clear Data options.
 -   [x] 🔒 **Offline First:** Uses `electron-store` for local data storage. Predefined data is also local.
+-   [x] 🔄 **Automatic Updates:** Checks for new versions on GitHub Releases and prompts for installation.
 
 ---
 
@@ -128,6 +130,7 @@ Because Anime List runs locally, common actions are significantly faster than wa
 *   **`electron-store` (v7.0.3)**: Local data persistence.
 *   **`sweetalert2` (v11.4.8)**: Pop-up dialogs.
 *   *(Uses Electron's built-in `net` module for API requests in manual add)*
+*   *(Uses Electron's built-in `autoUpdater` module for updates)*
 
 ---
 
@@ -136,7 +139,7 @@ Because Anime List runs locally, common actions are significantly faster than wa
 1.  Go to the **[Releases Page](https://github.com/iamplayerexe/animelist/releases)**.
 2.  Download the latest `.exe` setup file from the **Assets** section.
 3.  Run the installer.
-4.  Launch **Anime List**!
+4.  Launch **Anime List**! Updates will be checked automatically on launch.
 
 ---
 
@@ -193,3 +196,4 @@ Want to contribute code? (Requires Node.js & npm)
 
 This project is distributed under the **MIT License**.
 See `LICENSE` file for more information.
+<!-- <-- end comment (.md file)(README.md) -->
