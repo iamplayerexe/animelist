@@ -1,0 +1,231 @@
+{
+  "animes": {
+    "Naruto": {
+      "image": "https://cdn.myanimelist.net/images/anime/13/17405l.jpg",
+      "Season": [
+        { "number": 1, "name": "Naruto (Original Series)", "max_episodes": 220 }
+      ],
+      "Movie": [
+        { "number": 1, "name": "Ninja Clash in the Land of Snow", "max_episodes": 1 },
+        { "number": 2, "name": "Legend of the Stone of Gelel", "max_episodes": 1 },
+        { "number": 3, "name": "Guardians of the Crescent Moon Kingdom", "max_episodes": 1 }
+      ],
+      "OVA": [
+        { "number": 1, "name": "Find the Crimson Four-Leaf Clover!", "max_episodes": 1 },
+        { "number": 2, "name": "Mission: Protect the Waterfall Village!", "max_episodes": 1 }
+      ],
+      "Scan": [
+        { "number": 1, "name": "Naruto Manga", "max_episodes": 700 }
+      ]
+    },
+    "Naruto Shippuden": {
+       "image": "https://cdn.myanimelist.net/images/anime/1565/111305l.jpg",
+       "Season": [
+         { "number": 1, "name": "Naruto Shippuden", "max_episodes": 500 }
+       ],
+       "Movie": [
+         { "number": 1, "name": "Naruto Shippuden the Movie", "max_episodes": 1 },
+         { "number": 2, "name": "Bonds", "max_episodes": 1 },
+         { "number": 3, "name": "The Will of Fire", "max_episodes": 1 },
+         { "number": 4, "name": "The Lost Tower", "max_episodes": 1 },
+         { "number": 5, "name": "Blood Prison", "max_episodes": 1 },
+         { "number": 6, "name": "Road to Ninja", "max_episodes": 1 },
+         { "number": 7, "name": "The Last", "max_episodes": 1 }
+       ]
+    },
+    "One Piece": {
+      "image": "https://cdn.myanimelist.net/images/anime/1244/138851l.jpg",
+      "Season": [
+        { "number": 1, "name": "Saga 1: East Blue", "max_episodes": 61 },
+        { "number": 2, "name": "Saga 2: Alabasta", "max_episodes": 74 },
+        { "number": 3, "name": "Saga 3: Sky Island", "max_episodes": 71 },
+        { "number": 4, "name": "Saga 4: Water 7 / Enies Lobby", "max_episodes": 119 },
+        { "number": 5, "name": "Saga 5: Thriller Bark", "max_episodes": 58 },
+        { "number": 6, "name": "Saga 6: Summit War (Sabaody/Impel Down/Marineford)", "max_episodes": 177 },
+        { "number": 7, "name": "Saga 7: Fish-Man Island", "max_episodes": 62 },
+        { "number": 8, "name": "Saga 8: Dressrosa", "max_episodes": 158 },
+        { "number": 9, "name": "Saga 9: Whole Cake Island", "max_episodes": 131 },
+        { "number": 10, "name": "Saga 10: Wano Country", "max_episodes": 197 },
+        { "number": 11, "name": "Saga 11: Final Saga (Egghead Arc - Ongoing)", "max_episodes": 25 }
+      ],
+      "Movie": [
+        { "number": 1, "name": "One Piece: The Movie", "max_episodes": 1 },
+        { "number": 2, "name": "Clockwork Island Adventure", "max_episodes": 1 },
+        { "number": 3, "name": "Chopper's Kingdom on the Island of Strange Animals", "max_episodes": 1 },
+        { "number": 4, "name": "Dead End Adventure", "max_episodes": 1 },
+        { "number": 5, "name": "The Cursed Holy Sword", "max_episodes": 1 },
+        { "number": 6, "name": "Baron Omatsuri and the Secret Island", "max_episodes": 1 },
+        { "number": 7, "name": "The Giant Mechanical Soldier of Karakuri Castle", "max_episodes": 1 },
+        { "number": 10, "name": "Strong World", "max_episodes": 1 },
+        { "number": 11, "name": "One Piece 3D: Straw Hat Chase", "max_episodes": 1 },
+        { "number": 12, "name": "Film Z", "max_episodes": 1 },
+        { "number": 13, "name": "Film Gold", "max_episodes": 1 },
+        { "number": 14, "name": "Stampede", "max_episodes": 1 },
+        { "number": 15, "name": "Film: Red", "max_episodes": 1 }
+      ],
+      "Special": [
+         { "number": 1, "name": "Adventure of Nebulandia", "max_episodes": 1 },
+         { "number": 2, "name": "Heart of Gold", "max_episodes": 1 },
+         { "number": 3, "name": "Episode of East Blue: Luffy and His 4 Crewmates' Big Adventure", "max_episodes": 1 },
+         { "number": 4, "name": "Episode of Skypiea", "max_episodes": 1 }
+      ],
+      "OVA": [
+         { "number": 1, "name": "Defeat Him! The Pirate Ganzack", "max_episodes": 1 }
+      ],
+      "Scan": [
+        { "number": 1, "name": "One Piece Manga", "max_episodes": 1125 }
+      ]
+    },
+    "Bleach": {
+      "image": "https://cdn.myanimelist.net/images/anime/1764/126627l.jpg",
+      "Season": [
+        { "number": 1, "name": "Agent of the Shinigami arc", "max_episodes": 20 },
+        { "number": 2, "name": "Soul Society: The Sneak Entry arc", "max_episodes": 21 },
+        { "number": 3, "name": "Soul Society: The Rescue arc", "max_episodes": 22 },
+        { "number": 4, "name": "The Bount arc (Filler)", "max_episodes": 28 },
+        { "number": 5, "name": "Bount Assault on Soul Society arc (Filler)", "max_episodes": 18 },
+        { "number": 6, "name": "Arrancar: The Arrival arc", "max_episodes": 22 },
+        { "number": 7, "name": "Arrancar: The Hueco Mundo Sneak Entry arc", "max_episodes": 20 },
+        { "number": 8, "name": "Arrancar: The Fierce Fight arc", "max_episodes": 16 },
+        { "number": 9, "name": "The New Captain Shūsuke Amagai arc (Filler)", "max_episodes": 22 },
+        { "number": 10, "name": "Arrancar vs. Shinigami arc", "max_episodes": 16 },
+        { "number": 11, "name": "The Past arc", "max_episodes": 7 },
+        { "number": 12, "name": "Arrancar: Battle in Karakura arc", "max_episodes": 17 },
+        { "number": 13, "name": "Zanpakutō: The Alternate Tale arc (Filler)", "max_episodes": 36 },
+        { "number": 14, "name": "Arrancar: Downfall arc", "max_episodes": 51 },
+        { "number": 15, "name": "Gotei 13 Invading Army arc (Filler)", "max_episodes": 26 },
+        { "number": 16, "name": "The Lost Substitute Shinigami arc", "max_episodes": 24 },
+        { "number": 17, "name": "Thousand-Year Blood War", "max_episodes": 13 },
+        { "number": 18, "name": "Thousand-Year Blood War - The Separation", "max_episodes": 13 }
+      ],
+      "Movie": [
+        { "number": 1, "name": "Memories of Nobody", "max_episodes": 1 },
+        { "number": 2, "name": "The DiamondDust Rebellion", "max_episodes": 1 },
+        { "number": 3, "name": "Fade to Black", "max_episodes": 1 },
+        { "number": 4, "name": "Hell Verse", "max_episodes": 1 }
+      ],
+      "OVA": [
+          { "number": 1, "name": "Memories in the Rain", "max_episodes": 1 },
+          { "number": 2, "name": "The Sealed Sword Frenzy", "max_episodes": 1 }
+      ],
+       "Scan": [
+         { "number": 1, "name": "Bleach Manga", "max_episodes": 686 }
+       ]
+    },
+    "Attack on Titan": {
+      "image": "https://cdn.myanimelist.net/images/anime/10/47347l.jpg",
+      "Season": [
+        { "number": 1, "name": "Season 1", "max_episodes": 25 },
+        { "number": 2, "name": "Season 2", "max_episodes": 12 },
+        { "number": 3, "name": "Season 3 Part 1", "max_episodes": 12 },
+        { "number": 4, "name": "Season 3 Part 2", "max_episodes": 10 },
+        { "number": 5, "name": "Final Season Part 1", "max_episodes": 16 },
+        { "number": 6, "name": "Final Season Part 2", "max_episodes": 12 },
+        { "number": 7, "name": "Final Season The Final Chapters: Special 1", "max_episodes": 1 },
+        { "number": 8, "name": "Final Season The Final Chapters: Special 2", "max_episodes": 1 }
+      ],
+      "OVA": [
+        { "number": 1, "name": "Ilse's Notebook: Memoirs of a Scout Regiment Member", "max_episodes": 1 },
+        { "number": 2, "name": "The Sudden Visitor: The Torturous Curse of Youth", "max_episodes": 1 },
+        { "number": 3, "name": "Distress", "max_episodes": 1 },
+        { "number": 4, "name": "No Regrets: Part 1", "max_episodes": 1 },
+        { "number": 5, "name": "No Regrets: Part 2", "max_episodes": 1 },
+        { "number": 6, "name": "Lost Girls: Wall Sina, Goodbye (Part 1)", "max_episodes": 1 },
+        { "number": 7, "name": "Lost Girls: Wall Sina, Goodbye (Part 2)", "max_episodes": 1 },
+        { "number": 8, "name": "Lost Girls: Lost in the Cruel World", "max_episodes": 1 }
+      ],
+       "Scan": [
+         { "number": 1, "name": "Attack on Titan Manga", "max_episodes": 139 }
+       ]
+    },
+    "Death Note": {
+      "image": "https://cdn.myanimelist.net/images/anime/9/9453l.jpg",
+      "Season": [
+        { "number": 1, "name": "Death Note", "max_episodes": 37 }
+      ],
+      "Special": [
+        { "number": 1, "name": "Relight 1: Visions of a God", "max_episodes": 1 },
+        { "number": 2, "name": "Relight 2: L's Successors", "max_episodes": 1 }
+      ],
+       "Scan": [
+         { "number": 1, "name": "Death Note Manga", "max_episodes": 108 }
+       ]
+    },
+    "Fullmetal Alchemist: Brotherhood": {
+      "image": "https://cdn.myanimelist.net/images/anime/1208/94745l.jpg",
+      "Season": [
+        { "number": 1, "name": "Fullmetal Alchemist: Brotherhood", "max_episodes": 64 }
+      ],
+       "Movie": [
+         { "number": 1, "name": "The Sacred Star of Milos", "max_episodes": 1 }
+       ],
+       "Special": [
+         { "number": 1, "name": "The Blind Alchemist", "max_episodes": 1 },
+         { "number": 2, "name": "Simple People", "max_episodes": 1 },
+         { "number": 3, "name": "The Tale of Teacher", "max_episodes": 1 },
+         { "number": 4, "name": "Yet Another Man's Battlefield", "max_episodes": 1 }
+       ],
+       "Scan": [
+         { "number": 1, "name": "Fullmetal Alchemist Manga", "max_episodes": 108 }
+       ]
+    },
+    "Demon Slayer: Kimetsu no Yaiba": {
+      "image": "https://cdn.myanimelist.net/images/anime/1286/99889l.jpg",
+      "Season": [
+        { "number": 1, "name": "Tanjiro Kamado, Unwavering Resolve Arc", "max_episodes": 26 },
+        { "number": 2, "name": "Entertainment District Arc", "max_episodes": 11 },
+        { "number": 3, "name": "Swordsmith Village Arc", "max_episodes": 11 },
+        { "number": 4, "name": "Hashira Training Arc", "max_episodes": 8 }
+      ],
+      "Movie": [
+        { "number": 1, "name": "Mugen Train", "max_episodes": 1 }
+      ],
+       "Scan": [
+         { "number": 1, "name": "Demon Slayer Manga", "max_episodes": 205 }
+       ]
+    },
+    "Jujutsu Kaisen": {
+      "image": "https://cdn.myanimelist.net/images/anime/1792/138022l.jpg",
+      "Season": [
+        { "number": 1, "name": "Season 1", "max_episodes": 24 },
+        { "number": 2, "name": "Season 2 (Hidden Inventory / Premature Death / Shibuya Incident)", "max_episodes": 23 }
+      ],
+      "Movie": [
+        { "number": 0, "name": "Jujutsu Kaisen 0", "max_episodes": 1 }
+      ],
+       "Scan": [
+         { "number": 1, "name": "Jujutsu Kaisen Manga", "max_episodes": 262 }
+       ]
+    },
+    "My Hero Academia": {
+      "image": "https://cdn.myanimelist.net/images/anime/10/78745l.jpg",
+      "Season": [
+        { "number": 1, "name": "Season 1", "max_episodes": 13 },
+        { "number": 2, "name": "Season 2", "max_episodes": 25 },
+        { "number": 3, "name": "Season 3", "max_episodes": 25 },
+        { "number": 4, "name": "Season 4", "max_episodes": 25 },
+        { "number": 5, "name": "Season 5", "max_episodes": 25 },
+        { "number": 6, "name": "Season 6", "max_episodes": 25 },
+        { "number": 7, "name": "Season 7", "max_episodes": 21 }
+      ],
+      "Movie": [
+        { "number": 1, "name": "Two Heroes", "max_episodes": 1 },
+        { "number": 2, "name": "Heroes: Rising", "max_episodes": 1 },
+        { "number": 3, "name": "World Heroes' Mission", "max_episodes": 1 },
+        { "number": 4, "name": "You're Next", "max_episodes": 1 }
+      ],
+      "OVA": [
+         { "number": 1, "name": "Save! Rescue Training!", "max_episodes": 1 },
+         { "number": 2, "name": "Training of the Dead", "max_episodes": 1 },
+         { "number": 3, "name": "All Might: Rising The Animation", "max_episodes": 1 },
+         { "number": 4, "name": "Make It! Do-or-Die Survival Training (Part 1)", "max_episodes": 1 },
+         { "number": 5, "name": "Make It! Do-or-Die Survival Training (Part 2)", "max_episodes": 1 },
+         { "number": 6, "name": "HLB (Hero League Baseball)", "max_episodes": 1 },
+         { "number": 7, "name": "Laugh! As If You Are in Hell", "max_episodes": 1 }
+      ],
+      "Scan": [
+         { "number": 1, "name": "My Hero Academia Manga", "max_episodes": 425 }
+       ]
+    }
+  }
+}

@@ -1,0 +1,103 @@
+/* src/css/navbar.css */
+
+.navbar {
+  position: sticky;
+  /* Keep sticky */
+  top: 0;
+  z-index: 1000;
+  /* >>> ADD flex-shrink <<< */
+  flex-shrink: 0;
+  /* Prevent navbar from shrinking */
+
+  /* Keep existing styles */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2a2a2a;
+  padding: 10px var(--main-padding);
+  width: 100%;
+  /* left: 0; */
+  /* Not needed for sticky */
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #444;
+  border-radius: 0;
+}
+
+.navbar-left img {
+  height: 40px;
+  width: 40px;
+}
+
+.navbar-center {
+  text-align: center;
+  flex-grow: 1;
+  margin: 0 auto;
+}
+
+.neon-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--swal-primary-color);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 0 0 5px rgba(68, 136, 255, 0.3);
+  transition: text-shadow 0.3s, color 0.3s;
+  display: inline-block;
+  cursor: default;
+}
+
+.neon-text:hover {
+  color: var(--swal-primary-hover);
+  text-shadow: 0 0 3px var(--swal-primary-hover), 0 0 6px var(--swal-primary-color), 0 0 10px #2F86D3;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Base action button style (also used for Add button) */
+.action-button {
+  background-color: #2e2e2e;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, opacity 0.3s;
+}
+
+.action-button:hover:not(:disabled) {
+  background-color: #444;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.03);
+}
+
+.action-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #404040;
+  transform: none;
+}
+
+.action-button.success {
+  background-color: #228B22;
+  color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 100, 0, 0.4);
+  animation: pulseSuccess 0.5s 1;
+}
+
+.action-button.error {
+  background-color: var(--swal-deny-color);
+  color: #ffffff;
+  box-shadow: 0 4px 6px rgba(100, 0, 0, 0.4);
+  animation: shake 0.6s 1;
+}
+
+/* Specific ID for Add button if needed */
+#selectFile {
+  /* Inherits .action-button styles */
+  animation: fadeIn 0.5s ease-out;
+}

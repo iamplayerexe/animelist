@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="appTitle">Anime List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div id="loading-text"> <span>A</span><span>n</span><span>i</span><span>m</span><span>e</span> </div>
+    </div>
+
+    <header id="titlebar">
+        <div id="drag-region">
+            <div id="window-title"> <span data-translate="windowTitle">Anime List</span> </div>
+            <div id="window-controls">
+                <div class="button" id="min-button" data-translate-title="minimize" title="Minimiser"> <img class="icon"
+                        srcset="./icons/min-w-10.png 1x, ./icons/min-w-12.png 1.25x, ./icons/min-w-15.png 1.5x, ./icons/min-w-15.png 1.75x, ./icons/min-w-20.png 2x, ./icons/min-w-20.png 2.25x, ./icons/min-w-24.png 2.5x, ./icons/min-w-30.png 3x, ./icons/min-w-30.png 3.5x"
+                        draggable="false" /> </div>
+                <div class="button" id="max-button" data-translate-title="maximize" title="Agrandir"> <img class="icon"
+                        srcset="./icons/max-w-10.png 1x, ./icons/max-w-12.png 1.25x, ./icons/max-w-15.png 1.5x, ./icons/max-w-15.png 1.75x, ./icons/max-w-20.png 2x, ./icons/max-w-20.png 2.25x, ./icons/max-w-24.png 2.5x, ./icons/max-w-30.png 3x, ./icons/max-w-30.png 3.5x"
+                        draggable="false" /> </div>
+                <div class="button" id="restore-button" data-translate-title="restore" title="Restaurer"> <img
+                        class="icon"
+                        srcset="./icons/restore-w-10.png 1x, ./icons/restore-w-12.png 1.25x, ./icons/restore-w-15.png 1.5x, ./icons/restore-w-15.png 1.75x, ./icons/restore-w-20.png 2x, ./icons/restore-w-20.png 2.25x, ./icons/restore-w-24.png 2.5x, ./icons/restore-w-30.png 3x, ./icons/restore-w-30.png 3.5x"
+                        draggable="false" /> </div>
+                <div class="button" id="close-button" data-translate-title="close" title="Fermer"> <img class="icon"
+                        srcset="./icons/close-w-10.png 1x, ./icons/close-w-12.png 1.25x, ./icons/close-w-15.png 1.5x, ./icons/close-w-15.png 1.75x, ./icons/close-w-20.png 2x, ./icons/close-w-20.png 2.25x, ./icons/close-w-24.png 2.5x, ./icons/close-w-30.png 3x, ./icons/close-w-30.png 3.5x"
+                        draggable="false" /> </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="app-container">
+        <aside id="sidebar">
+             <button id="sidebar-toggle" data-translate-title="toggleSidebar" title="Basculer la barre latérale"> <img
+                     src="./assets/menu.png" alt="Toggle Sidebar" class="icon sidebar-toggle-icon"> </button>
+             <div class="sidebar-section">
+                 <div class="sidebar-title" data-translate="sidebarStatusTitle">Statut</div>
+                 <ul class="filter-list">
+                     <li class="filter-item"> <button class="filter-button active" data-status-filter="All"
+                             data-view-target="cards-container"> <span class="text"
+                                 data-translate="filterAll">Tout</span> </button> </li>
+                     <li class="filter-item"> <button class="filter-button" data-status-filter="Watching"
+                             data-view-target="cards-container"> <span class="text"
+                                 data-translate="filterWatching">Watching</span> </button> </li>
+                     <li class="filter-item"> <button class="filter-button" data-status-filter="Plan to Watch"
+                             data-view-target="cards-container"> <span class="text"
+                                 data-translate="filterPlanToWatch">Plan to Watch</span> </button> </li>
+                     <li class="filter-item"> <button class="filter-button" data-status-filter="Completed"
+                             data-view-target="cards-container"> <span class="text"
+                                 data-translate="filterCompleted">Terminé</span> </button> </li>
+                     <li class="filter-item"> <button class="filter-button" data-status-filter="On Hold"
+                             data-view-target="cards-container"> <span class="text" data-translate="filterOnHold">En
+                                 Pause</span> </button> </li>
+                     <li class="filter-item"> <button class="filter-button" data-status-filter="Dropped"
+                             data-view-target="cards-container"> <span class="text"
+                                 data-translate="filterDropped">Abandonné</span> </button> </li>
+                 </ul>
+             </div>
+             <div class="sidebar-section">
+                 <div class="sidebar-title" data-translate="sidebarTypeTitle">Type</div>
+                 <div id="type-filter-dropdown-container" class="filter-dropdown-container">
+                 </div>
+             </div>
+             <div class="sidebar-section sidebar-section-divider">
+                 <div class="sidebar-title" data-translate="sidebarManageTitle">Gestion</div>
+                 <ul>
+                     <li class="filter-item"> <button id="data-button" class="filter-button"
+                             data-view-target="data-management-view"> <span class="text"
+                                 data-translate="sidebarDataButton">Données</span> </button> </li>
+                 </ul>
+             </div>
+             <div id="language-selector-container"> </div>
+        </aside>
+
+        <div id="main">
+            <div class="navbar">
+                <div class="navbar-left"> <img src="./assets/xutron-logopng.png" alt="App Logo" class="navbar-logo">
+                </div>
+                <div class="navbar-center"> <span class="neon-text" data-translate="navbarTitle">Anime List</span>
+                </div>
+                <div class="navbar-right"> <button id="selectFile" class="action-button"
+                        data-translate-title="addButtonTitle" data-translate="addButtonText"
+                        title="Ajouter un Anime">+</button> </div>
+            </div>
+
+            <div id="content-area">
+                <div id="cards-container" class="cards-container view-container active-view"></div>
+
+                <div id="data-management-view" class="view-container" style="display: none;">
+                    <h2 data-translate="dataViewTitle">Gestion des Données</h2>
+                    <p data-translate="dataViewDescription">Importer ou exporter votre liste d'animes. L'importation
+                        peut remplacer ou fusionner les données.</p>
+                    <div class="data-actions"> <button id="import-button" class="action-button data-action-button"
+                            data-translate="dataImportButton">Importer (.json)</button> <button id="export-button"
+                            class="action-button data-action-button" data-translate="dataExportButton">Exporter
+                            (.json)</button> </div>
+                    <hr class="data-divider">
+                    <h3 data-translate="dataDangerZoneTitle">Zone Dangereuse</h3>
+                    <p data-translate="dataDangerZoneDescription">Attention, cette action est irréversible et supprimera
+                        toute votre liste.</p> <button id="clear-data-button" class="action-button danger-button"
+                        data-translate="dataClearButton">Supprimer toutes les données</button>
+                </div>
+
+                <div id="auto-add-view" class="view-container" style="display: none;">
+                    <div id="auto-add-cards-container" class="cards-container">
+                    </div>
+                </div>
+
+            </div>
+                        <!-- Inside #auto-add-controls-bar -->
+                        <div id="auto-add-controls-bar" class="auto-add-controls" style="display: none;">
+                            <button id="auto-add-cancel-button" data-translate="autoAddCancel">Cancel</button>
+                            <button id="auto-add-back-button" data-translate="autoAddBack" style="display: none;">Back</button>
+                            <!-- MODIFIED BUTTON STRUCTURE -->
+                            <button id="auto-add-confirm-button" disabled> <!-- Removed data-translate -->
+                               <span data-translate="autoAddConfirmEntry">Add Entries</span> <!-- Added span, moved data-translate -->
+                               <span id="auto-add-selection-count">(0)</span> <!-- Keep count span separate -->
+                            </button>
+                            <!-- END MODIFIED BUTTON STRUCTURE -->
+                       </div>
+
+            <footer>
+                <div class="footer-center">
+                    <span data-translate="footerCopyright">Anime List Copyright© </span>
+                    <span id="copyright-year"></span>
+                    <span data-translate="footerRights"> Tous droits réservés.</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../renderer.js"></script>
+</body>
+
+</html>

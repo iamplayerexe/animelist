@@ -1,0 +1,139 @@
+/* <-- comment (.css file)(src/css/auto-add-view.css) */
+/* src/css/auto-add-view.css - Styles for Auto-Add Steps */
+
+/* --- Main Auto-Add View Container (#auto-add-view) --- */
+#auto-add-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* --- Cards Container (#auto-add-cards-container) --- */
+#auto-add-cards-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  display: grid;
+  /* Default grid for title step */
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  /* --- MODIFICATION 1: Use a single gap value --- */
+  gap: 20px; /* Sets both row-gap and column-gap to 20px */
+  /* --- MODIFICATION 2: Set minimum row height --- */
+  /* Min card height (due to aspect-ratio & min-width) + gap */
+  grid-auto-rows: minmax(210px, auto);
+  /* --- MODIFICATION 3: Prevent items stretching vertically (often default, but explicit) --- */
+  align-items: start;
+  /* --- END MODIFICATIONS --- */
+}
+#auto-add-cards-container::-webkit-scrollbar { width: 10px; }
+#auto-add-cards-container::-webkit-scrollbar-track { background: #252525; border-radius: 5px; }
+#auto-add-cards-container::-webkit-scrollbar-thumb { background-color: #555; border-radius: 5px; border: 2px solid #252525; }
+#auto-add-cards-container::-webkit-scrollbar-thumb:hover { background-color: #777; }
+
+/* --- Loading/No Entries Messages --- */
+#auto-add-cards-container .loading-message,
+#auto-add-cards-container .no-entries-message {
+  grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: #ccc; opacity: 0.8;
+}
+#auto-add-cards-container .no-entries-message { font-style: italic; }
+
+/* --- 1. Anime Folder Card Styling (.auto-add-title-card) --- */
+.auto-add-title-card {
+position: relative;
+aspect-ratio: 1 / 1; /* Square */
+border-radius: 8px;
+overflow: hidden;
+cursor: pointer;
+transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+background-color: #282828;
+background-size: cover;
+background-position: center;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 10px;
+box-sizing: border-box;
+/* No min-height needed here as grid-auto-rows handles the row */
+}
+.auto-add-title-card:hover {
+transform: translateY(-4px) scale(1.02);
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+/* Dark overlay */
+.auto-add-title-card::before {
+content: "";
+position: absolute;
+top: 0; left: 0; right: 0; bottom: 0;
+background-color: rgba(0, 0, 0, 0.55);
+z-index: 1;
+transition: background-color 0.2s ease;
+}
+.auto-add-title-card:hover::before { background-color: rgba(0, 0, 0, 0.4); }
+/* Text on title card */
+.auto-add-title-card-name {
+position: relative;
+z-index: 2;
+color: #eee;
+font-size: 1.1em;
+font-weight: 600;
+text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+word-break: break-word;
+}
+/* Selection indicator borders */
+.auto-add-title-card.no-selection { border: 2px solid transparent; }
+.auto-add-title-card.partial-selection { border: 2px solid #e8a87c; }
+.auto-add-title-card.all-selection { border: 2px solid #a8e6cf; }
+
+
+/* --- 2. Anime Option Card Styling (.auto-add-entry-card) --- */
+#auto-add-cards-container.entry-view-grid {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Wider */
+  gap: 15px; /* Keep this different gap for the entry view if intended */
+  grid-auto-rows: auto; /* Reset auto-rows for entry view if needed */
+  align-items: stretch; /* Allow entry cards to have variable height */
+}
+.auto-add-entry-card {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  background-color: #33373c; /* Darker color */
+  border: 1px solid #4a4f54;
+  border-radius: 5px; /* Slightly less rounded */
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  color: #ccc;
+  position: relative;
+  /* Height adjusts automatically */
+  /* Removed aspect-ratio if it was ever applied here */
+}
+.auto-add-entry-card:not(.auto-add-select-all-card):hover { background-color: #3e4247; border-color: #5a5f64; transform: translateY(-2px); }
+
+/* Top-left section */
+.auto-add-entry-card .entry-card-type {
+  font-weight: 600; color: var(--swal-primary-color); font-size: 0.8em; text-transform: uppercase; margin-bottom: 2px; text-align: left;
+}
+.auto-add-entry-card .entry-card-name {
+  font-weight: 500; color: #eee; font-size: 1em; margin-bottom: 8px; text-align: left; overflow-wrap: break-word; word-break: break-word; flex-grow: 1; /* Push episodes down */
+}
+/* Bottom-right section */
+.auto-add-entry-card .entry-card-episodes {
+  font-size: 0.9em; color: #aaa; text-align: right; margin-top: 5px; /* Space above */
+}
+
+/* Selected state */
+.auto-add-entry-card.selected { border-color: var(--swal-primary-color); background-color: rgba(68, 136, 255, 0.1); box-shadow: 0 0 8px rgba(68, 136, 255, 0.3); }
+.auto-add-entry-card.selected::before { content: '✔'; position: absolute; top: 6px; right: 8px; color: var(--swal-primary-color); font-size: 1.2em; font-weight: bold; text-shadow: 0 0 3px rgba(0,0,0,0.5); }
+
+/* Select All Card */
+#auto-add-cards-container .auto-add-select-all-card { grid-column: 1 / -1; text-align: center; font-weight: bold; color: #a8e6cf; border: 1px dashed #a8e6cf; background-color: rgba(168, 230, 207, 0.05); margin-bottom: 10px; padding: 10px 12px; border-radius: 5px; cursor: pointer; transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
+#auto-add-cards-container .auto-add-select-all-card.selected { background-color: rgba(168, 230, 207, 0.15); border-style: solid; color: #d1f3e6; }
+#auto-add-cards-container .auto-add-select-all-card:hover { transform: none; background-color: rgba(168, 230, 207, 0.1); border-color: #bcecdb; }
+
+/* <-- end comment (.css file)(src/css/auto-add-view.css) */

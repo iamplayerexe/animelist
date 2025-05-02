@@ -1,0 +1,69 @@
+/* src/css/base.css */
+
+:root {
+  --sidebar-width-expanded: 240px;
+  --sidebar-width-collapsed: 60px;
+  --filter-button-padding-horizontal: 12px;
+  --toggle-button-height-expanded: 32px;
+  --toggle-button-icon-padding-left: 10px;
+  --toggle-button-height-collapsed: 32px;
+  --toggle-button-width-collapsed: 32px;
+  --toggle-button-top-offset-collapsed: 10px;
+  --transition-speed: 0.3s;
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --swal-primary-color: #4488FF;
+  --swal-primary-hover: #5599FF;
+  --swal-cancel-color: #6c757d;
+  --swal-cancel-hover: #5a6268;
+  --swal-deny-color: #d33;
+  --swal-deny-hover: #e54444;
+  --swal-bg: #383c42;
+  --swal-input-bg: #454a51;
+  --swal-border-color: #555b61;
+  --toggle-bg-expanded: linear-gradient(to bottom, #4a4a4a, #404040);
+  --toggle-bg-collapsed: #444;
+  --toggle-bg-hover: #585858;
+  --toggle-border-color: #5a5a5a;
+  --toggle-shadow-collapsed: 0 2px 5px rgba(0,0,0,0.45);
+  --data-button-bg: linear-gradient(to bottom, #505050, #454545);
+  --data-button-hover-bg: linear-gradient(to bottom, #5a5a5a, #4f4f4f);
+  --data-button-border: #606060;
+  --data-button-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  --data-button-hover-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  --danger-button-bg: linear-gradient(to bottom, #a03030, #8a2a2a);
+  --danger-button-hover-bg: linear-gradient(to bottom, #c73e3e, #a03030);
+  --danger-button-border: #7c2424;
+  --danger-button-shadow: 0 3px 5px rgba(100,0,0,0.4);
+  --danger-button-hover-shadow: 0 4px 8px rgba(120,0,0,0.5);
+  --main-padding: 20px;
+  --sidebar-padding-horizontal: 15px;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #1f1f1f;
+  color: white;
+  overflow: hidden;
+  height: 100vh;
+  border: 1px solid #48545c;
+  padding-top: 32px; /* Account for custom titlebar */
+}
+
+/* --- Global Custom Focus Visible Styling (Overrides Others) --- */
+:focus-visible {
+  /* Force remove default browser outline */
+  outline: none !important;
+  /* Force apply custom blue ring shadow, overwriting other focus shadows */
+  box-shadow: 0 0 0 2px var(--swal-primary-color) !important;
+  /* Optional: You could force a border color too, but shadow is usually preferred */
+  /* border-color: var(--swal-primary-color) !important; */
+}
+/* --- END: Custom Focus Visible Styling --- */

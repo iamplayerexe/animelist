@@ -1,0 +1,130 @@
+/* src/css/loading-screen.css */
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1f1f1f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    /* Background fade: duration 0.8s, triggered by JS */
+    transition: opacity 0.8s ease-out;
+    pointer-events: auto;
+    overflow: hidden;
+  }
+  
+  #loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  #loading-text {
+    font-family: Arial, sans-serif;
+    font-size: 4em;
+    font-weight: bold;
+    color: var(--swal-primary-color);
+    display: flex; /* Keep flex for alignment */
+    position: relative; /* To contain absolute positioning if needed, but not strictly necessary for transform */
+  }
+  
+  #loading-text span {
+    display: inline-block;
+    opacity: 0; /* Start hidden for fly-in */
+    transform: translateY(100px) scale(0.5) rotateX(-90deg);
+    transform-origin: center bottom;
+    /* Initial fly-in animation */
+    animation: fly-in-letter 0.7s cubic-bezier(0.3, 0.7, 0.1, 1.05) forwards;
+    /* REMOVE transitions */
+  }
+  
+  /* Staggered animation delay for the initial fly-in */
+  #loading-text span:nth-child(1) { animation-delay: 0.2s; } /* A */
+  #loading-text span:nth-child(2) { animation-delay: 0.35s; }/* n */
+  #loading-text span:nth-child(3) { animation-delay: 0.5s; } /* i */
+  #loading-text span:nth-child(4) { animation-delay: 0.35s; }/* m (match n) */
+  #loading-text span:nth-child(5) { animation-delay: 0.2s; } /* e (match A) */
+  /* Fly-in ends when 'i' finishes: 0.5s delay + 0.7s duration = 1.2s */
+  
+  
+  @keyframes fly-in-letter {
+    0% {
+      opacity: 0.2;
+      transform: translateY(100px) scale(0.5) rotateX(-90deg);
+      text-shadow: none;
+    }
+    70% {
+       opacity: 0.9; /* Fade in */
+       transform: translateY(-10px) scale(1.1) rotateX(10deg);
+       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Add basic shadow */
+    }
+    100% {
+      opacity: 1; /* END FULLY VISIBLE */
+      transform: translateY(0) scale(1) rotateX(0deg);
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Keep basic shadow */
+    }
+  }
+  
+  /* --- NEW: Slide-Out Animations --- */
+  /* Estimate: font-size 4em. Maybe move 2 chars = 2em? 1 char = 1em? Adjust these values */
+  @keyframes slide-right-to-center {
+    from {
+      transform: translateX(0); /* Start at final fly-in position */
+      opacity: 1;
+    }
+    to {
+      transform: translateX(1em); /* Move right by ~1 letter width */
+      opacity: 1; /* Stay visible */
+    }
+  }
+  @keyframes slide-far-right-to-center {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(2em); /* Move right by ~2 letter widths */
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slide-left-to-center {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-1em); /* Move left by ~1 letter width */
+      opacity: 1;
+    }
+  }
+  @keyframes slide-far-left-to-center {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-2em); /* Move left by ~2 letter widths */
+      opacity: 1;
+    }
+  }
+  
+  
+  /* --- NEW: Classes to apply slide animations --- */
+  /* Duration of slide animation */
+  .sliding-right-far {
+    animation: slide-far-right-to-center 0.6s ease-in-out forwards;
+  }
+  .sliding-right {
+    animation: slide-right-to-center 0.6s ease-in-out forwards;
+  }
+  .sliding-left {
+    animation: slide-left-to-center 0.6s ease-in-out forwards;
+  }
+  .sliding-left-far {
+    animation: slide-far-left-to-center 0.6s ease-in-out forwards;
+  }

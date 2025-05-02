@@ -1,0 +1,370 @@
+/* src/css/sidebar.css */
+
+/* Variables defined in base.css */
+
+#sidebar {
+  width: var(--sidebar-width-expanded);
+  background-color: #2a2e33;
+  border-right: 1px solid #444;
+  padding-top: var(--toggle-button-height-expanded);
+  padding-bottom: 0;
+  /* Let language selector handle its own padding */
+  padding-left: var(--sidebar-padding-horizontal, 15px);
+  padding-right: var(--sidebar-padding-horizontal, 15px);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* Keep for positioning toggle button */
+  transition: width var(--transition-speed) var(--transition-ease),
+    padding var(--transition-speed) var(--transition-ease);
+  /* MODIFIED: Allow vertical scrolling within the sidebar itself */
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+  height: 100%;
+  /* Make sidebar take full height of parent */
+}
+
+#sidebar-toggle {
+  position: absolute;
+  /* Stays relative to #sidebar */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--toggle-button-height-expanded);
+  background: var(--toggle-bg-expanded);
+  border: none;
+  border-bottom: 1px solid var(--toggle-border-color);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: var(--toggle-button-icon-padding-left);
+  cursor: pointer;
+  z-index: 1100;
+  /* Ensure it's above scrollbar */
+  transition-property: background-color, left, width, height, border-radius, justify-content, padding-left, box-shadow;
+  transition-duration: var(--transition-speed);
+  transition-timing-function: var(--transition-ease);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  /* Prevent shrinking */
+}
+
+#sidebar-toggle:hover {
+  background: var(--toggle-bg-hover);
+}
+
+#sidebar-toggle .icon.sidebar-toggle-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  margin-left: 5px;
+  filter: brightness(0.85) opacity(0.9);
+  transition: filter var(--transition-speed) ease-in-out,
+    transform var(--transition-speed) var(--transition-ease);
+}
+
+#sidebar-toggle:hover .icon.sidebar-toggle-icon {
+  filter: brightness(1.1) opacity(1);
+}
+
+/* --- Sidebar Collapsed State --- */
+#app-container.sidebar-collapsed #sidebar {
+  width: var(--sidebar-width-collapsed);
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: calc(var(--toggle-button-top-offset-collapsed, 10px) + var(--toggle-button-height-collapsed, 32px) + 10px);
+  overflow-y: hidden;
+  /* Hide scrollbar when collapsed */
+}
+
+#app-container.sidebar-collapsed #sidebar-toggle {
+  width: var(--toggle-button-width-collapsed, 32px);
+  height: var(--toggle-button-height-collapsed, 32px);
+  left: calc((var(--sidebar-width-collapsed) - var(--toggle-button-width-collapsed, 32px)) / 2);
+  top: var(--toggle-button-top-offset-collapsed, 10px);
+  border-radius: 0;
+  border-bottom: none;
+  justify-content: center;
+  padding-left: 0;
+  background: var(--toggle-bg-collapsed);
+  box-shadow: var(--toggle-shadow-collapsed);
+}
+
+#app-container.sidebar-collapsed #sidebar-toggle:hover {
+  background: var(--toggle-bg-hover);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.55);
+}
+
+#app-container.sidebar-collapsed #sidebar-toggle .icon.sidebar-toggle-icon {
+  width: 16px;
+  height: 16px;
+  filter: brightness(1) opacity(1);
+  transform: rotate(0deg);
+}
+
+#app-container.sidebar-collapsed .sidebar-section {
+  opacity: 0;
+  visibility: hidden;
+  padding-left: 0;
+  padding-right: 0;
+  transition: opacity var(--transition-speed) ease-in-out,
+    visibility 0s linear var(--transition-speed),
+    padding var(--transition-speed) ease-in-out;
+}
+
+#app-container.sidebar-collapsed #language-selector-container {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0s linear 0.2s;
+}
+
+/* --- END Sidebar Collapsed State --- */
+
+/* Sidebar Sections (Expanded State) */
+.sidebar-section {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--transition-speed) ease-in-out,
+    visibility 0s linear 0s,
+    padding var(--transition-speed) ease-in-out;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+  /* Prevent sections from shrinking vertically */
+}
+
+.sidebar-title {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #888;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #444;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+.sidebar-section>ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-item {
+  margin-bottom: 5px;
+}
+
+/* Filter Buttons (Expanded State) - Applies only to Status and Data buttons now */
+.filter-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 10px var(--filter-button-padding-horizontal, 12px);
+  background-color: transparent;
+  border: none;
+  color: #b0b0b0;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s, padding 0.2s, margin 0.2s, width 0.2s;
+  border-radius: 0;
+  white-space: normal;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+  min-height: 40px;
+  flex-shrink: 0;
+}
+
+.filter-button:hover {
+  background-color: #383c42;
+  color: #fff;
+}
+
+/* Active Filter Buttons */
+.filter-button.active {
+  background-color: var(--swal-primary-color);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 5px 10px rgba(68, 136, 255, 0.2);
+  margin-left: calc(-1 * var(--sidebar-padding-horizontal, 15px));
+  margin-right: calc(-1 * var(--sidebar-padding-horizontal, 15px));
+  padding-left: calc(var(--filter-button-padding-horizontal, 12px) + var(--sidebar-padding-horizontal, 15px));
+  padding-right: calc(var(--filter-button-padding-horizontal, 12px) + var(--sidebar-padding-horizontal, 15px));
+  width: calc(100% + 2 * var(--sidebar-padding-horizontal, 15px));
+  border-radius: 0;
+}
+
+.filter-button.active:hover {
+  background-color: var(--swal-primary-color);
+  color: white;
+}
+
+.filter-button .text {
+  flex-grow: 1;
+  opacity: 1;
+  visibility: visible;
+  width: auto;
+  transition: opacity var(--transition-speed) ease-in-out, visibility 0s linear 0s;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Specific styles for Data Button */
+#data-button {
+  justify-content: center;
+  gap: 0;
+  text-align: center;
+}
+
+#data-button .text {
+  flex-grow: 0;
+}
+
+#app-container.sidebar-collapsed .filter-button .text {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+  transition: opacity var(--transition-speed) ease-in-out,
+    visibility 0s linear var(--transition-speed),
+    width var(--transition-speed) ease-in-out;
+}
+
+#app-container.sidebar-collapsed .filter-button {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  min-height: initial;
+}
+
+/* --- Styles for Type Filter Dropdown --- */
+.filter-dropdown-container {
+  padding: 0;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  /* Spacing above dropdown */
+  flex-shrink: 0;
+  /* Prevent shrinking */
+}
+
+#type-filter-select {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 0.95em;
+  color: #eee;
+  background-color: #3a3f44;
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23CCCCCC%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px auto;
+  transition: border-color 0.2s, background-color 0.2s;
+  box-sizing: border-box;
+}
+
+#type-filter-select:hover {
+  border-color: #777;
+  background-color: #4a4f54;
+}
+
+#type-filter-select:focus {
+  outline: none;
+  border-color: var(--swal-primary-color);
+  box-shadow: 0 0 0 2px rgba(68, 136, 255, 0.3);
+}
+
+#type-filter-select option {
+  background-color: #444;
+  color: #eee;
+}
+
+/* --- END: Type Filter Dropdown Styles --- */
+
+/* Divider rule */
+.sidebar-section-divider {
+  flex-shrink: 0;
+  height: 1px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+/* --- Language Selector Container --- */
+#language-selector-container {
+  margin-top: auto;
+  /* Push to bottom of flex container */
+  padding: 10px var(--sidebar-padding-horizontal, 15px);
+  border-top: 1px solid #444;
+  position: relative;
+  /* For dropdown */
+  box-sizing: border-box;
+  flex-shrink: 0;
+  /* Prevent shrinking */
+}
+
+/* --- ADDED: Custom Scrollbar for Sidebar --- */
+#sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+  background: #202327;
+  /* Slightly darker than sidebar bg */
+  border-radius: 0;
+  /* Optional: Match sidebar edges */
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+  /* Optional border to make thumb seem inset */
+  /* border: 1px solid #1a1d20; */
+}
+
+#sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+/* --- END: Custom Scrollbar --- */
+
+
+/* --- Language List Scrollbar (Already Added) --- */
+.language-options-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.language-options-list::-webkit-scrollbar-track {
+  background: #2a2e33;
+  border-radius: 4px;
+}
+
+.language-options-list::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 4px;
+  border: 2px solid #2a2e33;
+}
+
+.language-options-list::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+/* --- END: Language List Scrollbar --- */
