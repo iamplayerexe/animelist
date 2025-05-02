@@ -1869,6 +1869,343 @@
           "max_episodes": 704
         }
       ]
+    },
+    "Steins;Gate": {
+      "image": "https://m.media-amazon.com/images/M/MV5BZjI1YjZiMDUtZTI3MC00YTA5LWIzMmMtZmQ0NTZiYWM4NTYwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Steins;Gate",
+          "max_episodes": 24
+        },
+        {
+          "number": 2,
+          "name": "Steins;Gate 0",
+          "max_episodes": 23
+        }
+      ],
+      "Movie": [
+        {
+          "number": 1,
+          "name": "Load Region of Déjà vu",
+          "max_episodes": 1
+        }
+      ],
+      "OAV": [
+        {
+          "number": 1,
+          "name": "Special Episode: Egoistic Poriomania",
+          "max_episodes": 1
+        },
+        {
+          "number": 2,
+          "name": "Steins;Gate 0 Special: Valentine's of Crystal Polymorphism",
+          "max_episodes": 1
+        }
+      ],
+      "Special": [
+         {
+           "number": 1,
+           "name": "Cognitive Computing (ONA Shorts)",
+           "max_episodes": 4
+         }
+      ]
+    },
+    "Vinland Saga": {
+      "image": "https://fr.web.img4.acsta.net/pictures/19/09/16/17/09/4903250.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Season 1",
+          "max_episodes": 24
+        },
+        {
+          "number": 2,
+          "name": "Season 2",
+          "max_episodes": 24
+        }
+      ],
+      "Scan": [
+        {
+          "number": 1,
+          "name": "Vinland Saga Manga",
+          "max_episodes": 212
+        }
+      ]
+    },
+    "Mob Psycho 100": {
+      "image": "https://fr.web.img2.acsta.net/pictures/20/11/12/14/25/3371142.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Mob Psycho 100",
+          "max_episodes": 12
+        },
+        {
+          "number": 2,
+          "name": "Mob Psycho 100 II",
+          "max_episodes": 13
+        },
+        {
+          "number": 3,
+          "name": "Mob Psycho 100 III",
+          "max_episodes": 12
+        }
+      ],
+      "OAV": [
+        {
+          "number": 1,
+          "name": "Reigen - The Miraculous Unknown Psychic",
+          "max_episodes": 1
+        },
+        {
+          "number": 2,
+          "name": "The First Spirits and Such Company Trip",
+          "max_episodes": 1
+        }
+      ],
+       "Special": [
+         {
+           "number": 1,
+           "name": "Mini Specials (Season 1)",
+           "max_episodes": 6
+         }
+      ]
+    },
+    "Made in Abyss": {
+      "image": "https://m.media-amazon.com/images/S/pv-target-images/4bc953c9edc3c2e58ce28b82bfdcad85adfa2189440f70ba8daed74e072182c3.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Season 1",
+          "max_episodes": 13
+        },
+        {
+          "number": 2,
+          "name": "The Golden City of the Scorching Sun",
+          "max_episodes": 12
+        }
+      ],
+      "Movie": [
+        {
+          "number": 1,
+          "name": "Journey's Dawn (Recap)",
+          "max_episodes": 1
+        },
+        {
+          "number": 2,
+          "name": "Wandering Twilight (Recap)",
+          "max_episodes": 1
+        },
+        {
+          "number": 3,
+          "name": "Dawn of the Deep Soul",
+          "max_episodes": 1
+        }
+      ],
+      "Scan": [
+        {
+          "number": 1,
+          "name": "Made in Abyss Manga",
+          "max_episodes": 67
+        }
+      ]
+    },
+    "The Promised Neverland": {
+      "image": "https://fr.web.img4.acsta.net/pictures/20/02/26/09/12/3483516.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Season 1",
+          "max_episodes": 12
+        },
+        {
+          "number": 2,
+          "name": "Season 2",
+          "max_episodes": 11
+        }
+      ],
+       "Special": [
+         {
+           "number": 1,
+           "name": "Omake",
+           "max_episodes": 3
+         }
+      ],
+      "Scan": [
+        {
+          "number": 1,
+          "name": "The Promised Neverland Manga",
+          "max_episodes": 181
+        }
+      ]
+    },
+    "Violet Evergarden": {
+      "image": "https://fr.web.img5.acsta.net/pictures/19/07/08/14/30/4126186.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Violet Evergarden",
+          "max_episodes": 13
+        }
+      ],
+      "Movie": [
+        {
+          "number": 1,
+          "name": "Eternity and the Auto Memory Doll",
+          "max_episodes": 1
+        },
+        {
+          "number": 2,
+          "name": "Violet Evergarden: The Movie",
+          "max_episodes": 1
+        }
+      ],
+      "Special": [
+        {
+          "number": 1,
+          "name": "Kitto \"Ai\" wo Shiru Hi ga Kuru no Darou",
+          "max_episodes": 1
+        }
+      ]
+    },
+    "Mushishi": {
+       "image": "https://m.media-amazon.com/images/I/71O1OqGCWLL.jpg",
+       "Season": [
+         {
+           "number": 1,
+           "name": "Mushishi",
+           "max_episodes": 26
+         },
+         {
+           "number": 2,
+           "name": "Mushishi Zoku Shou",
+           "max_episodes": 10
+         },
+         {
+           "number": 3,
+           "name": "Mushishi Zoku Shou 2nd Season",
+           "max_episodes": 10
+         }
+       ],
+       "Movie": [
+         {
+           "number": 1,
+           "name": "Mushishi Zoku Shou: Suzu no Shizuku",
+           "max_episodes": 1
+         }
+       ],
+       "Special": [
+         {
+           "number": 1,
+           "name": "Mushishi Special: Hihamukage",
+           "max_episodes": 1
+         },
+          {
+           "number": 2,
+           "name": "Mushishi Zoku Shou: Odoro no Michi",
+           "max_episodes": 1
+         }
+       ],
+       "Scan": [
+         {
+           "number": 1,
+           "name": "Mushishi Manga",
+           "max_episodes": 50
+         }
+       ]
+     },
+    "Kill la Kill": {
+      "image": "https://upload.wikimedia.org/wikipedia/en/a/a9/Killlakillpromo.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Kill la Kill",
+          "max_episodes": 24
+        }
+      ],
+      "Special": [
+        {
+          "number": 1,
+          "name": "Goodbye Again",
+          "max_episodes": 1
+        }
+      ]
+    },
+    "Re:ZERO -Starting Life in Another World-": {
+      "image": "https://fr.web.img5.acsta.net/pictures/20/04/17/15/18/4142036.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Season 1",
+          "max_episodes": 25
+        },
+        {
+          "number": 2,
+          "name": "Season 2 Part 1",
+          "max_episodes": 13
+        },
+        {
+          "number": 3,
+          "name": "Season 2 Part 2",
+          "max_episodes": 12
+        }
+      ],
+      "OAV": [
+        {
+          "number": 1,
+          "name": "Memory Snow",
+          "max_episodes": 1
+        },
+        {
+          "number": 2,
+          "name": "The Frozen Bond",
+          "max_episodes": 1
+        }
+      ],
+      "Special": [
+         {
+           "number": 1,
+           "name": "Break Time Shorts (S1)",
+           "max_episodes": 25
+         },
+         {
+           "number": 2,
+           "name": "Break Time Shorts (S2)",
+           "max_episodes": 25
+         }
+      ],
+      "Scan": [
+        {
+          "number": 1,
+          "name": "Re:ZERO Light Novels",
+          "max_episodes": 37
+        }
+      ]
+    },
+    "Toradora!": {
+      "image": "https://m.media-amazon.com/images/M/MV5BNjEyZmRmMGYtNGY1Zi00MTFiLWE0ZTMtNzUzMWJmMTgzNWE5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+      "Season": [
+        {
+          "number": 1,
+          "name": "Toradora!",
+          "max_episodes": 25
+        }
+      ],
+      "OAV": [
+        {
+          "number": 1,
+          "name": "The True Meaning of Bento",
+          "max_episodes": 1
+        }
+      ],
+      "Special": [
+        {
+          "number": 1,
+          "name": "SOS! Hurray for Gourmands",
+          "max_episodes": 4
+        }
+      ]
     }
   }
 }
