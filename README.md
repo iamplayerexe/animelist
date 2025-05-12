@@ -87,7 +87,7 @@
 
 ---
 
-## 🎯 Why Choose Anime List?
+## 🎯 Why Choose Anime List ?
 
 > Simple, Fast, Private Anime Tracking.
 
