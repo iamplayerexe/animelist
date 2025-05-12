@@ -146,7 +146,7 @@ Because Anime List runs locally, common actions are significantly faster than wa
 ## 📖 How to Use
 
 1.  🖱️ **Launch:** Open the app.
-2.  ➕ **Add Anime:** Click **`+`** (navbar). You'll be prompted to choose:
+2.  ➕ **Add Anime:** Click on **`+`** (navbar). You'll be prompted to choose:
     *   **Automatic:**
         1.  Select the main anime title from the grid.
         2.  Select the specific seasons, movies, OAVs, etc., you want to add. Use "Select All" / "Deselect All" for convenience.
