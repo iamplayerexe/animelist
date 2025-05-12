@@ -19,7 +19,7 @@
   <a href="https://github.com/iamplayerexe/animelist/releases"><img src="https://img.shields.io/github/v/release/iamplayerexe/animelist?style=for-the-badge" alt="Latest Release"></a>
 </p>
 
-> A simple, **offline-first** desktop application built with Electron for managing your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, specials, and more using manual entry or a faster **automatic mode** powered by a predefined local database. Designed for Windows & soon.
+> A simple, **offline-first** desktop application built with Electron for managing your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, specials, and more using manual entry or a faster **automatic mode** powered by a predefined local database. Designed for Windows & soon more.
 
 ---
 
