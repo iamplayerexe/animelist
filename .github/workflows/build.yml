@@ -1,0 +1,51 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    permissions:
+      contents: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    
+    runs-on: ${{ matrix.os }}
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Linux Dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libasound2t64 libxtst-dev libxss1 libnss3 xvfb
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and Publish on Linux
+        if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum npm run publish
+
+      - name: Build and Publish on macOS
+        if: runner.os == 'macOS'
+        run: npm run publish
+
+      - name: Build and Publish on Windows
+        if: runner.os == 'Windows'
+        run: npm run publish

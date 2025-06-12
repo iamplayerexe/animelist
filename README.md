@@ -1,4 +1,3 @@
-<!-- <-- comment (.md file)(README.md) -->
 <div align="center">
 
 # Anime List 📺
@@ -19,7 +18,7 @@
   <a href="https://github.com/iamplayerexe/animelist/releases"><img src="https://img.shields.io/github/v/release/iamplayerexe/animelist?style=for-the-badge" alt="Latest Release"></a>
 </p>
 
-> A simple, **offline-first** desktop application built with Electron for managing your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, specials, and more using manual entry or a faster **automatic mode** powered by a predefined local database. Designed for Windows.
+> A simple, **offline-first** desktop application for **Windows, macOS, and Linux**, built to manage your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, and more using manual entry or a faster **automatic mode** powered by a local database.
 
 ---
 
@@ -28,7 +27,7 @@
 **(👇 Click to expand!)**
 
 <details>
-  <summary><strong>✨ Main Interface & Manual Add/Update Demo</strong></summary>
+  <summary><strong>✨ Main Interface & Features Demo</strong></summary>
   <br/>
   <p align="center">
     <em>Main view displaying your anime list cards:</em><br/>
@@ -36,54 +35,26 @@
     <br/><br/>
     <em>Demonstration: Manually adding an anime, changing status, and updating progress:</em><br/>
     <img src="https://cdn.discordapp.com/attachments/1037490342062207046/1364830358457155634/FirstGif-ezgif.com-video-to-gif-converter.gif?ex=680b18d2&is=6809c752&hm=9047294daf2fe56736834dfdb5e24b141f5c7a892ac07c52478f5b8841ba2660&" alt="GIF showing manual adding anime and updating episodes">
-  </p>
-</details>
-
-<details>
-  <summary><strong>🚀 Automatic Add Demo & More Features</strong></summary>
-  <br/>
-  <p align="center">
-    <em>Demonstration: Using the Automatic Add feature (Select Title -> Select Entries -> Confirm):</em><br/>
-    <!-- TODO: Add GIF/Image for Automatic Add -->
-    <img src="[PLACEHOLDER_URL_FOR_AUTO_ADD_DEMO]" alt="GIF showing automatic anime adding workflow" width="750">
     <br/><br/>
     <em>Filtering by "Completed" Status and "OAV" Type:</em><br/>
     <img src="https://cdn.discordapp.com/attachments/1037490342062207046/1364892800088408104/secondgifRaliseavecClipchamp-ezgif.com-video-to-gif-converter.gif?ex=680b52fa&is=680a017a&hm=c23eec476a7e9cac7aad99942c8b938f9f48010cb5d598906e289412713f1b6c&" alt="Screenshot showing Filtering">
-    <br/><br/>
-    <em>Data Management: Export:</em><br/>
-    <img src="https://cdn.discordapp.com/attachments/1037490342062207046/1364899529262108692/VidosanstitreRaliseavecClipchamp1-ezgif.com-video-to-gif-converter.gif?ex=680b593e&is=680a07be&hm=625e98caae5b0c284e4864ad4cf2b1a2ffcdd61a58ebe602ac1f4bee44efc3a1&" alt="Screenshot showing Data Management Export">
-    <br/><br/>
-    <em>Data Management: Clear Data Confirmation:</em><br/>
-    <img src="https://cdn.discordapp.com/attachments/1037490342062207046/1364899528846606418/VidosanstitreRaliseavecClipchamp1-ezgif.com-speed.gif?ex=680b593e&is=680a07be&hm=81aaf70e10627ee8abe23eb30e6d1f4cbbd4830421eaa74ec5dc1854749f5071&" alt="Screenshot showing Data Management Clear">
-    <br/><br/>
-    <em>Data Management: Import Options:</em><br/>
-    <img src="https://cdn.discordapp.com/attachments/1037490342062207046/1364899528439762944/VidosanstitreRaliseavecClipchamp1-ezgif.com-speed_1.gif?ex=680b593e&is=680a07be&hm=024aa5d26691fc8c6f49152a1944037249f544da59d3c8a6dfa7d134997ee300&" alt="Screenshot showing Data Management Import">
-    <br/><br/>
-    <em>Language Selection Dropdown:</em><br/>
-    <img src="https://cdn.discordapp.com/attachments/1037490342062207046/1364902570174189608/VidosanstitreRaliseavecClipchamp2-ezgif.com-video-to-gif-converter.gif?ex=680b5c13&is=680a0a93&hm=36bf35ae28d96a5e27b00bcf23232a13d017f2cae7d2417777f9f43e6c8d5741&" alt="Screenshot showing Language Selection">
-     <br/><br/>
-    <em>Details Popup View:</em><br/>
-    <img src="https://cdn.discordapp.com/attachments/1037490342062207046/1364902569650032710/VidosanstitreRaliseavecClipchamp3-ezgif.com-video-to-gif-converter.gif?ex=680b5c13&is=680a0a93&hm=30450460cafd7244abc20564ddbeb767e5ba62d5d6415e9f1b1bc0f86be1998a&" alt="Screenshot showing Details Popup">
-
-  </div>
+  </p>
 </details>
 
 ---
 
 ## ✨ Features Checklist
 
+-   [x] 🖥️ **Cross-Platform:** Native installers for Windows, macOS, and Linux.
 -   [x] ✨ **Manual Addition:** Add anime quickly (Title, Type, Number, Episodes).
 -   [x] 🚀 **Automatic Addition:** Quickly add predefined anime entries (Seasons, Movies, OAVs etc.) from a local database.
--   [x] 🎨 **Automatic Cover Art:** Fetches cover art from Jikan API for manually added entries. (Automatic mode uses predefined images).
--   [x] 🖼️ **Custom Cover Art:** Option to use your own image URL (Manual Add).
--   [x] 📊 **Status Tracking:** Set status (Watching, Completed, etc.) via card dropdowns.
--   [x] 🔢 **Progress Tracking:** Use `+`/`-` for episode counts (Series/OAVs) or toggle Watched (Movies).
--   [x] ℹ️ **Detailed View:** Popup with full details per anime (allows editing watched/total episodes).
--   [x] 🔍 **Filtering:** Sidebar filters for **Status** (buttons) and **Type** (dropdown).
--   [x] 🌐 **Multi-language:** Supports 20 languages via sidebar dropdown.
+-   [x] 🎨 **Automatic Cover Art:** Fetches cover art from Jikan API for manually added entries.
+-   [x] 📊 **Status & Progress Tracking:** Set status via dropdowns and track episodes with `+`/`-` buttons.
+-   [x] 🔍 **Filtering:** Sidebar filters for **Status** and **Type**.
+-   [x] 🌐 **Multi-language:** Supports 20 languages via a sidebar dropdown.
 -   [x] 💾 **Data Management:** Import/Export (`.json`) & Clear Data options.
--   [x] 🔒 **Offline First:** Uses `electron-store` for local data storage. Predefined data is also local.
--   [x] 🔄 **Automatic Updates:** Checks for new versions on GitHub Releases and prompts for installation.
+-   [x] 🔒 **Offline First:** Your data is stored locally and securely on your computer.
+-   [x] 🔄 **Smart Updates:** Seamless auto-updates for Windows & macOS; update notifications for Linux.
 
 ---
 
@@ -94,52 +65,60 @@
 *   ✅ **Focus:** Tracks only what matters without website bloat.
 *   ⚡ **Speed:** Instant updates and list viewing - no waiting for web pages. **Automatic add** significantly speeds up adding large series.
 *   🏠 **Privacy:** Your list lives entirely on your computer.
-*   🔌 **Offline Access:** Use it anywhere, anytime (images need initial fetch for manual entries).
-
-### 🚀 Speed Comparison
-
-Because Anime List runs locally, common actions are significantly faster than waiting for website interactions:
-
-| Action                   | Anime List (Local) 🏠     | Typical Website ☁️        |
-| :----------------------- | :------------------------ | :-------------------------- |
-| Add Entry (Manual)       | Instant Save ✅           | Page Load + Form + Submit⏳|
-| Add Entry (Automatic)    | Select + Instant Save ✅✅ | N/A (Requires manual entry) |
-| Update Status            | Instant Save ✅           | Page Load + Click + Reload⏳ |
-| Update Episode           | Instant Save ✅           | Page Load + Click + Reload⏳ |
-| View List                | Instant Load ✅           | Page Load + API Calls ⏳    |
-| Filter List              | Instant UI Update ✅      | Page Reload / API Call ⏳   |
-
-*(Speed benefits are most noticeable for frequent updates, viewing, and adding entries via automatic mode).*
+*   🔌 **Offline Access:** Use it anywhere, anytime (images need an initial connection for manual entries).
 
 ---
 
-## 🛠️ Built With
+## 🚀 Getting Started
 
-*   💻 **[Electron](https://www.electronjs.org/) (v26.6.10)**: Desktop app framework.
-*   🔩 **[Electron Forge](https://www.electronforge.io/) (v7.8.0)**: Build & packaging tools.
-*   🦴 **HTML**: Content structure.
-*   🎨 **CSS**: Styling, animations, themes.
-*   💡 **JavaScript (Node.js)**: App logic & interactions.
-
----
-
-## 📦 Key Dependencies
-
-*   **`electron` (v26.6.10)**: (Dev Dependency) Core framework.
-*   **`@electron-forge/cli` (v7.8.0)**: (Dev Dependency) Build tools.
-*   **`electron-store` (v7.0.3)**: Local data persistence.
-*   **`sweetalert2` (v11.4.8)**: Pop-up dialogs.
-*   *(Uses Electron's built-in `net` module for API requests in manual add)*
-*   *(Uses Electron's built-in `autoUpdater` module for updates)*
-
----
-
-## 🚀 Getting Started (Windows Only)
+> **Note:** Please download version **v1.2.0 or newer**. This is the first version with stable, cross-platform installers and auto-updates.
 
 1.  Go to the **[Releases Page](https://github.com/iamplayerexe/animelist/releases)**.
-2.  Download the latest `.exe` setup file from the **Assets** section.
-3.  Run the installer.
-4.  Launch **Anime List**! Updates will be checked automatically on launch.
+2.  Download the correct installer for your operating system from the **Assets** section.
+
+<details>
+  <summary><strong>🪟 Windows Installation</strong></summary>
+  <br/>
+  <ol>
+    <li>Download the file ending in <code>-Setup.exe</code>.</li>
+    <li>Run the installer.</li>
+    <li>⚠️ <strong>Windows SmartScreen:</strong> If a warning appears, click "More info" → "Run anyway". This is because the application is not from a registered publisher.</li>
+    <li>Launch <strong>Anime List</strong>! The app will check for updates automatically.</li>
+  </ol>
+</details>
+
+<details>
+  <summary><strong>🍎 macOS Installation</strong></summary>
+  <br/>
+  <ol>
+    <li>Download the file ending in <code>.zip</code>.</li>
+    <li>Unzip the file to get <code>AnimeList.app</code>.</li>
+    <li>Drag <code>AnimeList.app</code> into your <strong>/Applications</strong> folder.</li>
+    <li>⚠️ <strong>First Launch:</strong> You must <strong>right-click</strong> the app icon and select <strong>"Open"</strong>. A warning will appear; click the "Open" button on the dialog to proceed. You only need to do this once.</li>
+    <li>Launch the app normally from then on! It will update automatically.</li>
+  </ol>
+</details>
+
+<details>
+  <summary><strong>🐧 Linux Installation</strong></summary>
+  <br/>
+  <ol>
+    <li>Download the appropriate package for your distribution:
+        <ul>
+            <li><code>.deb</code> for Debian, Ubuntu, Mint, etc.</li>
+            <li><code>.rpm</code> for Fedora, CentOS, etc.</li>
+        </ul>
+    </li>
+    <li><strong>To Install (GUI):</strong> Double-click the downloaded file to open it with your system's software installer.</li>
+    <li><strong>To Install (Terminal):</strong>
+        <ul>
+            <li>For <code>.deb</code>: <code>sudo dpkg -i file-name.deb</code> (then <code>sudo apt-get install -f</code> if needed).</li>
+            <li>For <code>.rpm</code>: <code>sudo dnf install file-name.rpm</code>.</li>
+        </ul>
+    </li>
+    <li>Launch the app. It will notify you when a new version is available for manual download.</li>
+  </ol>
+</details>
 
 ---
 
@@ -149,27 +128,22 @@ Because Anime List runs locally, common actions are significantly faster than wa
 2.  ➕ **Add Anime:** Click **`+`** (navbar). You'll be prompted to choose:
     *   **Automatic:**
         1.  Select the main anime title from the grid.
-        2.  Select the specific seasons, movies, OAVs, etc., you want to add. Use "Select All" / "Deselect All" for convenience.
-        3.  Click **"Add Selected Entry (#)"**.
+        2.  Select the specific seasons, movies, OAVs, etc., you want to add.
+        3.  Click **"Add Selected Entry"**.
     *   **Manual:**
-        1.  Fill in the details in the popup (Title, Type, Number, Episodes, optional Image URL).
-        2.  *Tip:* Only **Title** and **Type** are always required. Number is needed for 'Season'. Episodes autofills for 'Movie'.
-        3.  Click **"Add"**.
+        1.  Fill in the details in the popup.
+        2.  Click **"Add"**.
 3.  📝 **Manage Cards:**
     *   *Status:* Use the **dropdown** on the card.
-    *   *Progress:* Use **`+`**/**`-`** buttons (handles episodes or movie watched status). Click the watched number to edit manually (non-Movie types).
-    *   *Details:* Click the **"Details"** button (also allows editing watched/total episodes).
+    *   *Progress:* Use **`+`**/**`-`** buttons.
+    *   *Details:* Click the **"Details"** button to edit episode counts and more.
     *   *Delete:* Click **"Details"** -> **"Delete"** -> Confirm.
 4.  📊 **Filter List:**
     *   *Toggle Sidebar:* Click **☰** button.
-    *   *Filter:* Click **Status buttons** or select from **Type dropdown**. Filters combine.
-    *   *Clear:* Select **"All"** (Status) and **"All Types"** (Type).
+    *   *Filter:* Click **Status buttons** or select from the **Type dropdown**.
 5.  ⚙️ **Data & Settings:**
-    *   Click **"Data"** button in the sidebar.
-    *   *Import/Export:* Use the respective buttons. Choose Overwrite/Merge for import.
-    *   *Clear:* Click **"Delete all data"** (⚠️ IRREVERSIBLE!).
-    *   *Language:* Use the **language dropdown** at the bottom of the sidebar.
-    *   *Back to Cards:* Click any **Status button** or select a **Type**.
+    *   Click **"Data"** button in the sidebar for Import/Export/Clear options.
+    *   Use the **language dropdown** at the bottom of the sidebar.
 
 ---
 
@@ -192,8 +166,12 @@ Want to contribute code? (Requires Node.js & npm)
 
 ---
 
+## 🙏 Acknowledgements
+
+This project's cross-platform support and automated release pipeline were implemented with the assistance of Google's AI. This collaboration was instrumental in solving complex build configurations and ensuring a stable release for Windows, macOS, and Linux users.
+
+---
+
 ## 📜 License
 
-This project is distributed under the **MIT License**.
-See `LICENSE` file for more information.
-<!-- <-- end comment (.md file)(README.md) -->
+This project is distributed under the **MIT License**. See the `LICENSE` file for more information.
