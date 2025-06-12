@@ -7,7 +7,9 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: './src/assets/xutron-logo', 
+    // Using a base name for the icon is best practice.
+    // Forge will append .ico for Windows and .icns for macOS.
+    icon: './src/assets/app-logo', 
     appCopyright: `Copyright ©️ ${new Date().getFullYear()} Xutron`,
     win32metadata: {
       CompanyName: 'Xutron',
@@ -18,6 +20,8 @@ module.exports = {
 
   rebuildConfig: {},
 
+  // This is the corrected list of makers.
+  // No 'platforms' arrays are needed. Forge handles this automatically.
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
@@ -28,9 +32,7 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-zip',
-      // CORRECTED: This maker should ONLY run on macOS ('darwin').
-      // This removes the conflict with the .deb and .rpm makers on the Linux runner.
-      platforms: ['darwin'],
+      // The 'platforms' array has been removed.
     },
     {
       name: '@electron-forge/maker-deb',
@@ -38,7 +40,7 @@ module.exports = {
           options: {
               maintainer: 'Xutron',
               homepage: 'https://github.com/iamplayerexe/animelist',
-              icon: './src/assets/app-logo.png',
+              icon: './src/assets/app.png',
               productName: 'AnimeList',
               license: 'MIT'
           }
