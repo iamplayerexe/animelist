@@ -18,7 +18,7 @@
   <a href="https://github.com/iamplayerexe/animelist/releases"><img src="https://img.shields.io/github/v/release/iamplayerexe/animelist?style=for-the-badge" alt="Latest Release"></a>
 </p>
 
-> A simple, **offline-first** desktop application for **Windows, macOS, and Linux**, built to manage your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, and more using manual entry or a faster **automatic mode** powered by a local database.
+> A simple, **offline-first** desktop application built with Electron for managing your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, specials, and more using manual entry or a faster **automatic mode** powered by a predefined local database. Designed for Windows.
 
 ---
 
@@ -58,7 +58,7 @@
 
 ---
 
-## 🎯 Why Choose Anime List?
+## 🎯 Why Choose Anime List ?
 
 > Simple, Fast, Private Anime Tracking.
 
@@ -125,7 +125,7 @@
 ## 📖 How to Use
 
 1.  🖱️ **Launch:** Open the app.
-2.  ➕ **Add Anime:** Click **`+`** (navbar). You'll be prompted to choose:
+2.  ➕ **Add Anime:** Click on **`+`** (navbar). You'll be prompted to choose:
     *   **Automatic:**
         1.  Select the main anime title from the grid.
         2.  Select the specific seasons, movies, OAVs, etc., you want to add.
@@ -174,4 +174,5 @@ This project's cross-platform support and automated release pipeline were implem
 
 ## 📜 License
 
-This project is distributed under the **MIT License**. See the `LICENSE` file for more information.
+This project is distributed under the **MIT License**.
+See `LICENSE` file for more information.
