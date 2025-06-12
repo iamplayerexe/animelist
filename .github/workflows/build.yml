@@ -28,6 +28,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          # Add caching for npm dependencies
+          cache: 'npm'
 
       - name: Install Linux Dependencies
         if: runner.os == 'Linux'
@@ -38,14 +40,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build and Publish on Linux
-        if: runner.os == 'Linux'
-        run: xvfb-run --auto-servernum npm run publish
-
-      - name: Build and Publish on macOS
-        if: runner.os == 'macOS'
-        run: npm run publish
-
-      - name: Build and Publish on Windows
-        if: runner.os == 'Windows'
-        run: npm run publish
+      # This is the new, more direct build command structure
+      - name: Build and Publish
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" == "Linux" ]; then
+            # On Linux, run the publish command with xvfb
+            xvfb-run --auto-servernum npx electron-forge publish
+          else
+            # On Windows and macOS, run it directly
+            npx electron-forge publish
+          fi
