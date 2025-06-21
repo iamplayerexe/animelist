@@ -19,37 +19,41 @@ module.exports = {
 
   makers: [
     {
-      // Windows installer
       name: '@electron-forge/maker-squirrel',
+      // This maker will only run on Windows
+      platforms: ['win32'],
       config: {
         name: "AnimeList",
         setupIcon: './src/assets/app-logo.ico',
       },
     },
     {
-      // UPDATED: Changed from maker-zip to maker-dmg for a better macOS experience
+      // This maker will only run on macOS
       name: '@electron-forge/maker-dmg',
+      platforms: ['darwin'],
       config: {
-        icon: './src/assets/app-logo.icns', // Assuming you have this icon file
+        icon: './src/assets/app-logo.icns',
         name: 'AnimeList'
-      }
+      },
     },
     {
-      // Linux .deb installer
+      // This maker will only run on Linux
       name: '@electron-forge/maker-deb',
+      platforms: ['linux'],
       config: {
           options: {
               maintainer: 'Xutron',
               homepage: 'https://github.com/iamplayerexe/animelist',
-              icon: './src/assets/app.png',
+              icon: './src/assets/app-logo.png',
               productName: 'AnimeList',
               license: 'MIT'
           }
       },
     },
     {
-      // Linux .rpm installer
+      // This maker will also only run on Linux
       name: '@electron-forge/maker-rpm',
+      platforms: ['linux'],
       config: {
           options: {
               maintainer: 'Xutron',
@@ -82,12 +86,11 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
-        // UPDATED: This now points to your PRIVATE repository for releases
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist_app' // IMPORTANT: Create this private repo on GitHub
+          name: 'animelist'
         },
-        authToken: process.env.GITHUB_TOKEN, // This will be provided by the workflow secret
+        authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
         draft: false
       }
