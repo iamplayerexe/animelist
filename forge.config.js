@@ -1,3 +1,4 @@
+// forge.config.js
 require('dotenv').config();
 
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
@@ -20,7 +21,7 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      // This maker will only run on Windows
+      // This maker will ONLY run on Windows
       platforms: ['win32'],
       config: {
         name: "AnimeList",
@@ -28,31 +29,31 @@ module.exports = {
       },
     },
     {
-      // This maker will only run on macOS
       name: '@electron-forge/maker-dmg',
+      // This maker will ONLY run on macOS
       platforms: ['darwin'],
       config: {
-        icon: './src/assets/app-logo.icns',
+        icon: './src/assets/app-logo.icns', // Ensure this file exists
         name: 'AnimeList'
-      },
+      }
     },
     {
-      // This maker will only run on Linux
       name: '@electron-forge/maker-deb',
+      // This maker will ONLY run on Linux
       platforms: ['linux'],
       config: {
           options: {
               maintainer: 'Xutron',
               homepage: 'https://github.com/iamplayerexe/animelist',
-              icon: './src/assets/app-logo.png',
+              icon: './src/assets/app.png',
               productName: 'AnimeList',
               license: 'MIT'
           }
       },
     },
     {
-      // This maker will also only run on Linux
       name: '@electron-forge/maker-rpm',
+      // This maker will also ONLY run on Linux
       platforms: ['linux'],
       config: {
           options: {
@@ -86,9 +87,10 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
+        // This should point to your PRIVATE releases repository
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist'
+          name: 'animelist_app' // IMPORTANT: Create this private repo if it doesn't exist
         },
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
