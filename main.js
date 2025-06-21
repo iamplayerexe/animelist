@@ -19,7 +19,7 @@ if (require('electron-squirrel-startup')) {
 
 // --- Auto Update Setup ---
 const owner = 'iamplayerexe';
-const repo = 'animelist';
+const repo = 'animelist_app'; // CRITICAL: Point to your PRIVATE releases repository
 const repoUrl = `https://github.com/${owner}/${repo}`;
 
 function initializeAutoUpdater() {

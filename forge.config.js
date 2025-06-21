@@ -1,4 +1,3 @@
-// forge.config.js
 require('dotenv').config();
 
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
@@ -7,10 +6,8 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    // Using a base name for the icon is best practice.
-    // Forge will append .ico for Windows and .icns for macOS.
     icon: './src/assets/app-logo', 
-    appCopyright: `Copyright ©️ ${new Date().getFullYear()} Xutron`,
+    appCopyright: `Copyright © ${new Date().getFullYear()} Xutron`,
     win32metadata: {
       CompanyName: 'Xutron',
       ProductName: 'AnimeList',
@@ -20,10 +17,9 @@ module.exports = {
 
   rebuildConfig: {},
 
-  // This is the corrected list of makers.
-  // No 'platforms' arrays are needed. Forge handles this automatically.
   makers: [
     {
+      // Windows installer
       name: '@electron-forge/maker-squirrel',
       config: {
         name: "AnimeList",
@@ -31,10 +27,15 @@ module.exports = {
       },
     },
     {
-      name: '@electron-forge/maker-zip',
-      // The 'platforms' array has been removed.
+      // UPDATED: Changed from maker-zip to maker-dmg for a better macOS experience
+      name: '@electron-forge/maker-dmg',
+      config: {
+        icon: './src/assets/app-logo.icns', // Assuming you have this icon file
+        name: 'AnimeList'
+      }
     },
     {
+      // Linux .deb installer
       name: '@electron-forge/maker-deb',
       config: {
           options: {
@@ -47,6 +48,7 @@ module.exports = {
       },
     },
     {
+      // Linux .rpm installer
       name: '@electron-forge/maker-rpm',
       config: {
           options: {
@@ -80,11 +82,12 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
+        // UPDATED: This now points to your PRIVATE repository for releases
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist'
+          name: 'animelist_app' // IMPORTANT: Create this private repo on GitHub
         },
-        authToken: process.env.GITHUB_TOKEN,
+        authToken: process.env.GITHUB_TOKEN, // This will be provided by the workflow secret
         prerelease: false,
         draft: false
       }

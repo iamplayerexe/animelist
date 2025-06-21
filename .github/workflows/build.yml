@@ -18,7 +18,8 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # UPDATED: Use the PAT secret for cross-repository permissions
+      GITHUB_TOKEN: ${{ secrets.PAT }}
 
     steps:
       - name: Checkout code
@@ -28,7 +29,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          # Add caching for npm dependencies
           cache: 'npm'
 
       - name: Install Linux Dependencies
@@ -40,14 +40,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # This is the new, more direct build command structure
       - name: Build and Publish
         shell: bash
         run: |
+          # Corrected shell script syntax
           if [ "${{ runner.os }}" == "Linux" ]; then
-            # On Linux, run the publish command with xvfb
             xvfb-run --auto-servernum npx electron-forge publish
           else
-            # On Windows and macOS, run it directly
             npx electron-forge publish
           fi

@@ -15,7 +15,7 @@
   <a href="https://github.com/sindresorhus/electron-store"><img src="https://img.shields.io/badge/electron_store-7.0.3-blue?style=for-the-badge" alt="electron-store"></a>
   <a href="https://sweetalert2.github.io/"><img src="https://img.shields.io/badge/SweetAlert2-11.4.8-orange?style=for-the-badge" alt="SweetAlert2"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License: MIT"></a>
-  <a href="https://github.com/iamplayerexe/animelist/releases"><img src="https://img.shields.io/github/v/release/iamplayerexe/animelist?style=for-the-badge" alt="Latest Release"></a>
+  <a href="https://github.com/iamplayerexe/animelist_app/releases"><img src="https://img.shields.io/github/v/release/iamplayerexe/animelist_app?style=for-the-badge" alt="Latest Release"></a>
 </p>
 
 > A simple, **offline-first** desktop application built with Electron for managing your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, specials, and more using manual entry or a faster **automatic mode** powered by a predefined local database. Designed for **Windows, Linux and Mac**.
@@ -73,7 +73,7 @@
 
 > **Note:** Please download version **v1.2.0 or newer**. This is the first version with stable, cross-platform installers and auto-updates.
 
-1.  Go to the **[Releases Page](https://github.com/iamplayerexe/animelist/releases)**.
+1.  Go to the **[Releases Page](https://github.com/iamplayerexe/animelist_app/releases)**.
 2.  Download the correct installer for your operating system from the **Assets** section.
 
 <details>
@@ -91,10 +91,10 @@
   <summary><strong>🍎 macOS Installation</strong></summary>
   <br/>
   <ol>
-    <li>Download the file ending in <code>.zip</code>.</li>
-    <li>Unzip the file to get <code>AnimeList.app</code>.</li>
-    <li>Drag <code>AnimeList.app</code> into your <strong>/Applications</strong> folder.</li>
-    <li>⚠️ <strong>First Launch:</strong> You must <strong>right-click</strong> the app icon and select <strong>"Open"</strong>. A warning will appear; click the "Open" button on the dialog to proceed. You only need to do this once.</li>
+    <li>Download the file ending in <code>.dmg</code>.</li>
+    <li>Open the <code>.dmg</code> file.</li>
+    <li>Drag the <strong>AnimeList</strong> app icon to the <strong>Applications</strong> folder shortcut.</li>
+    <li>⚠️ <strong>First Launch:</strong> You may need to <strong>right-click</strong> the app icon and select <strong>"Open"</strong>. If a warning appears, click the "Open" button on the dialog to proceed. You only need to do this once.</li>
     <li>Launch the app normally from then on! It will update automatically.</li>
   </ol>
 </details>
