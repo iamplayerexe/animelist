@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      # UPDATED: Use the PAT secret for cross-repository permissions
+      # Use the PAT secret for cross-repository permissions
       GITHUB_TOKEN: ${{ secrets.PAT }}
 
     steps:
@@ -43,7 +43,6 @@ jobs:
       - name: Build and Publish
         shell: bash
         run: |
-          # Corrected shell script syntax
           if [ "${{ runner.os }}" == "Linux" ]; then
             xvfb-run --auto-servernum npx electron-forge publish
           else

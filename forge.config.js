@@ -33,9 +33,9 @@ module.exports = {
       // This maker will ONLY run on macOS
       platforms: ['darwin'],
       config: {
-        icon: './src/assets/app-logo.icns', // Ensure this file exists
+        icon: './src/assets/app-logo.icns', // Ensure this file exists in src/assets
         name: 'AnimeList'
-      }
+      },
     },
     {
       name: '@electron-forge/maker-deb',
@@ -87,10 +87,10 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
-        // This should point to your PRIVATE releases repository
+        // This MUST point to your PRIVATE releases repository
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist_app' // IMPORTANT: Create this private repo if it doesn't exist
+          name: 'animelist_app' 
         },
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
