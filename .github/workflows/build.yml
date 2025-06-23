@@ -18,8 +18,6 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      # Use the PAT secret for cross-repository permissions if needed,
-      # or the default token if publishing to the same repo.
       GITHUB_TOKEN: ${{ secrets.PAT }}
 
     steps:
@@ -41,19 +39,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # --- DEFINITIVE FIX: OS-SPECIFIC PUBLISH STEPS ---
-
-      - name: Build and Publish on Windows
-        if: runner.os == 'Windows'
-        # Explicitly tell Forge to ONLY use the squirrel (Windows) maker
-        run: npx electron-forge publish --targets @electron-forge/maker-squirrel
-
-      - name: Build and Publish on macOS
-        if: runner.os == 'macOS'
-        # Explicitly tell Forge to ONLY use the dmg (macOS) maker
-        run: npx electron-forge publish --targets @electron-forge/maker-dmg
-
-      - name: Build and Publish on Linux
-        if: runner.os == 'Linux'
-        # Explicitly tell Forge to ONLY use the deb and rpm (Linux) makers
-        run: xvfb-run --auto-servernum npx electron-forge publish --targets @electron-forge/maker-deb,@electron-forge/maker-rpm
+      - name: Build and Publish
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" == "Linux" ]; then
+            xvfb-run --auto-servernum npx electron-forge publish
+          else
+            npx electron-forge publish
+          fi

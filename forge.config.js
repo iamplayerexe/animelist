@@ -1,3 +1,4 @@
+// forge.config.js
 require('dotenv').config();
 
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
@@ -41,7 +42,8 @@ module.exports = {
           options: {
               maintainer: 'Xutron',
               homepage: 'https://github.com/iamplayerexe/animelist',
-              icon: './src/assets/app.png',
+              // CORRECTED: Pointing to the specified PNG file
+              icon: './src/assets/app-logo.png',
               productName: 'AnimeList',
               license: 'MIT'
           }
@@ -54,7 +56,8 @@ module.exports = {
           options: {
               maintainer: 'Xutron',
               homepage: 'https://github.com/iamplayerexe/animelist',
-              icon: './src/assets/app.png',
+              // CORRECTED: Pointing to the specified PNG file
+              icon: './src/assets/app-logo.png',
               productName: 'AnimeList',
               license: 'MIT'
           }
@@ -82,10 +85,9 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
-        // This should point to your PRIVATE releases repository
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist_app' 
+          name: 'animelist'
         },
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
