@@ -18,10 +18,10 @@ module.exports = {
 
   rebuildConfig: {},
 
+  // This matches your working zip_analyser config, without the 'platforms' keys
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      platforms: ['win32'],
       config: {
         name: "AnimeList",
         setupIcon: './src/assets/app-logo.ico',
@@ -29,7 +29,6 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-dmg',
-      platforms: ['darwin'],
       config: {
         icon: './src/assets/app-logo.icns',
         name: 'AnimeList'
@@ -37,12 +36,10 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-deb',
-      platforms: ['linux'],
       config: {
           options: {
               maintainer: 'Xutron',
               homepage: 'https://github.com/iamplayerexe/animelist',
-              // CORRECTED: Pointing to the specified PNG file
               icon: './src/assets/app-logo.png',
               productName: 'AnimeList',
               license: 'MIT'
@@ -51,12 +48,10 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-rpm',
-      platforms: ['linux'],
       config: {
           options: {
               maintainer: 'Xutron',
               homepage: 'https://github.com/iamplayerexe/animelist',
-              // CORRECTED: Pointing to the specified PNG file
               icon: './src/assets/app-logo.png',
               productName: 'AnimeList',
               license: 'MIT'
@@ -87,7 +82,7 @@ module.exports = {
       config: {
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist'
+          name: 'animelist_app' 
         },
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
