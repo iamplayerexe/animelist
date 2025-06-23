@@ -21,7 +21,6 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      // This maker will ONLY run on Windows
       platforms: ['win32'],
       config: {
         name: "AnimeList",
@@ -30,16 +29,14 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-dmg',
-      // This maker will ONLY run on macOS
       platforms: ['darwin'],
       config: {
-        icon: './src/assets/app-logo.icns', // Ensure this file exists in src/assets
+        icon: './src/assets/app-logo.icns',
         name: 'AnimeList'
       },
     },
     {
       name: '@electron-forge/maker-deb',
-      // This maker will ONLY run on Linux
       platforms: ['linux'],
       config: {
           options: {
@@ -53,7 +50,6 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-rpm',
-      // This maker will also ONLY run on Linux
       platforms: ['linux'],
       config: {
           options: {
@@ -87,10 +83,9 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
-        // This MUST point to your PRIVATE releases repository
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist_app' 
+          name: 'animelist'
         },
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
