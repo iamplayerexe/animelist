@@ -1,4 +1,3 @@
-// forge.config.js
 require('dotenv').config();
 
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
@@ -83,9 +82,10 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
+        // This should point to your PRIVATE releases repository
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist'
+          name: 'animelist_app' 
         },
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
