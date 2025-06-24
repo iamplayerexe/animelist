@@ -1,4 +1,3 @@
-// forge.config.js
 require('dotenv').config();
 
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
@@ -34,25 +33,29 @@ module.exports = {
       },
     },
     {
-      // CORRECTED .deb maker configuration
       name: '@electron-forge/maker-deb',
+      platforms: ['linux'], // Explicitly declare this maker is for Linux
       config: {
-        maintainer: 'Xutron',
-        homepage: 'https://github.com/iamplayerexe/animelist',
-        icon: './src/assets/app-logo.png',
-        productName: 'AnimeList',
-        license: 'MIT'
+        options: {
+          maintainer: 'Xutron',
+          homepage: 'https://github.com/iamplayerexe/animelist',
+          icon: './src/assets/app-logo.png',
+          productName: 'AnimeList',
+          license: 'MIT'
+        }
       },
     },
     {
-      // CORRECTED .rpm maker configuration
       name: '@electron-forge/maker-rpm',
+      platforms: ['linux'], // Explicitly declare this maker is for Linux
       config: {
-        maintainer: 'Xutron',
-        homepage: 'https://github.com/iamplayerexe/animelist',
-        icon: './src/assets/app-logo.png',
-        productName: 'AnimeList',
-        license: 'MIT'
+        options: {
+          maintainer: 'Xutron',
+          homepage: 'https://github.com/iamplayerexe/animelist',
+          icon: './src/assets/app-logo.png',
+          productName: 'AnimeList',
+          license: 'MIT'
+        }
       },
     },
   ],
