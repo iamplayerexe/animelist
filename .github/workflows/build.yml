@@ -30,7 +30,7 @@ jobs:
           
       - name: Get App Info from package.json
         id: package
-        uses: jaywcjlove/github-action-package@v4 # <-- THIS LINE IS THE FIX
+        uses: jaywcjlove/github-action-package@v2.0.0
 
       - name: Install Linux Dependencies
         if: runner.os == 'Linux'
@@ -52,6 +52,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
 
+      - name: List build artifacts
+        shell: bash
+        run: |
+          echo "Listing contents of 'out/make' directory:"
+          ls -R out/make
+
       - name: Upload Artifacts to Private Repo Release
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
@@ -59,15 +65,23 @@ jobs:
           APP_NAME: ${{ steps.package.outputs.name }}
         shell: bash
         run: |
-          PRIVATE_REPO="iamplayerexe/${APP_NAME}_app"
+          # --- THIS IS THE FIX: Hardcode the correct private repository name ---
+          PRIVATE_REPO="iamplayerexe/zip_analyser_app"
           
           echo "Preparing to release version ${TAG} of ${APP_NAME} to ${PRIVATE_REPO}"
 
-          # Create the release in the private repository, or ignore if it exists
+          # Create the release in the private repository
           gh release create "${TAG}" --repo "${PRIVATE_REPO}" --title "${APP_NAME} ${TAG}" --notes "Automated release of ${APP_NAME} version ${TAG}." || echo "Release ${TAG} already exists. Proceeding to upload assets."
 
-          # Upload all generated .zip and .dmg files from the 'out/make' directory
           echo "Uploading assets..."
-          gh release upload "${TAG}" --repo "${PRIVATE_REPO}" --clobber out/make/**/*.{zip,dmg}
+          
+          # Use specific paths for each OS to avoid globbing issues.
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            gh release upload "${TAG}" --repo "${PRIVATE_REPO}" --clobber out/make/zip/win32/x64/*.zip
+          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            gh release upload "${TAG}" --repo "${PRIVATE_REPO}" --clobber out/make/*.dmg
+          else # Linux
+            gh release upload "${TAG}" --repo "${PRIVATE_REPO}" --clobber out/make/zip/linux/x64/*.zip
+          fi
 
           echo "Release process complete."
