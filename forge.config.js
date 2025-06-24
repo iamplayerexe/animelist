@@ -7,7 +7,7 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: './src/assets/app-logo', 
+    icon: './src/assets/app-logo',
     appCopyright: `Copyright © ${new Date().getFullYear()} Xutron`,
     win32metadata: {
       CompanyName: 'Xutron',
@@ -18,7 +18,6 @@ module.exports = {
 
   rebuildConfig: {},
 
-  // This matches your working zip_analyser config, without the 'platforms' keys
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
@@ -35,27 +34,25 @@ module.exports = {
       },
     },
     {
+      // CORRECTED .deb maker configuration
       name: '@electron-forge/maker-deb',
       config: {
-          options: {
-              maintainer: 'Xutron',
-              homepage: 'https://github.com/iamplayerexe/animelist',
-              icon: './src/assets/app-logo.png',
-              productName: 'AnimeList',
-              license: 'MIT'
-          }
+        maintainer: 'Xutron',
+        homepage: 'https://github.com/iamplayerexe/animelist',
+        icon: './src/assets/app-logo.png',
+        productName: 'AnimeList',
+        license: 'MIT'
       },
     },
     {
+      // CORRECTED .rpm maker configuration
       name: '@electron-forge/maker-rpm',
       config: {
-          options: {
-              maintainer: 'Xutron',
-              homepage: 'https://github.com/iamplayerexe/animelist',
-              icon: './src/assets/app-logo.png',
-              productName: 'AnimeList',
-              license: 'MIT'
-          }
+        maintainer: 'Xutron',
+        homepage: 'https://github.com/iamplayerexe/animelist',
+        icon: './src/assets/app-logo.png',
+        productName: 'AnimeList',
+        license: 'MIT'
       },
     },
   ],
@@ -82,7 +79,7 @@ module.exports = {
       config: {
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist_app' 
+          name: 'animelist_app'
         },
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
