@@ -6,12 +6,12 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: './src/assets/app-logo',
+    icon: "./src/assets/app-logo",
     appCopyright: `Copyright © ${new Date().getFullYear()} Xutron`,
     win32metadata: {
       CompanyName: 'Xutron',
       ProductName: 'AnimeList',
-      FileDescription: 'Application to manage your anime list.',
+      FileDescription: 'Application to manage and track anime.',
     }
   },
 
@@ -19,22 +19,24 @@ module.exports = {
 
   makers: [
     {
+      // Windows installer
       name: '@electron-forge/maker-squirrel',
       config: {
-        name: "AnimeList",
+        name: "AnimeList", // A name without spaces is safer
         setupIcon: './src/assets/app-logo.ico',
       },
     },
     {
+      // UPDATED: Changed from maker-zip to maker-dmg for a better macOS experience
       name: '@electron-forge/maker-dmg',
       config: {
         icon: './src/assets/app-logo.icns',
-        name: 'AnimeList'
-      },
+        name: 'AnimeList',
+      }
     },
     {
+      // Linux .deb installer
       name: '@electron-forge/maker-deb',
-      platforms: ['linux'], // Explicitly declare this maker is for Linux
       config: {
         options: {
           maintainer: 'Xutron',
@@ -46,8 +48,8 @@ module.exports = {
       },
     },
     {
+      // Linux .rpm installer
       name: '@electron-forge/maker-rpm',
-      platforms: ['linux'], // Explicitly declare this maker is for Linux
       config: {
         options: {
           maintainer: 'Xutron',
@@ -80,11 +82,12 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
+        // UPDATED: This now points to your PRIVATE repository for releases
         repository: {
           owner: 'iamplayerexe',
-          name: 'animelist_app'
+          name: 'animelist_app' // IMPORTANT: Change if your private repo has a different name
         },
-        authToken: process.env.GITHUB_TOKEN,
+        authToken: process.env.GITHUB_TOKEN, // This will be provided by the workflow secret
         prerelease: false,
         draft: false
       }
