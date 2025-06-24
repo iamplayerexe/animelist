@@ -1,4 +1,5 @@
-name: Build & Release
+# .github/workflows/build.yml
+name: Build & Release App
 
 on:
   push:
@@ -6,7 +7,7 @@ on:
       - 'v*.*.*'
 
 jobs:
-  build:
+  build_and_release:
     permissions:
       contents: write
 
@@ -17,10 +18,6 @@ jobs:
     
     runs-on: ${{ matrix.os }}
 
-    env:
-      # UPDATED: Use the PAT secret for cross-repository permissions
-      GITHUB_TOKEN: ${{ secrets.PAT }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,6 +27,10 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+          
+      - name: Get App Info from package.json
+        id: package
+        uses: jaywcjlove/github-action-package@v3.0.1
 
       - name: Install Linux Dependencies
         if: runner.os == 'Linux'
@@ -40,12 +41,33 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build and Publish
+      - name: Build Application Packages
         shell: bash
         run: |
-          # The 'then' keyword is added to fix shell syntax errors
           if [ "${{ runner.os }}" == "Linux" ]; then
-            xvfb-run --auto-servernum npx electron-forge publish
+            xvfb-run --auto-servernum npx electron-forge make
           else
-            npx electron-forge publish
+            npx electron-forge make
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: Upload Artifacts to Private Repo Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          TAG: ${{ github.ref_name }}
+          APP_NAME: ${{ steps.package.outputs.name }}
+        shell: bash
+        run: |
+          PRIVATE_REPO="iamplayerexe/${APP_NAME}_app"
+          
+          echo "Preparing to release version ${TAG} of ${APP_NAME} to ${PRIVATE_REPO}"
+
+          # Create the release in the private repository, or ignore if it exists
+          gh release create "${TAG}" --repo "${PRIVATE_REPO}" --title "${APP_NAME} ${TAG}" --notes "Automated release of ${APP_NAME} version ${TAG}." || echo "Release ${TAG} already exists. Proceeding to upload assets."
+
+          # Upload all generated .zip and .dmg files from the 'out/make' directory
+          echo "Uploading assets..."
+          gh release upload "${TAG}" --repo "${PRIVATE_REPO}" --clobber out/make/**/*.{zip,dmg}
+
+          echo "Release process complete."

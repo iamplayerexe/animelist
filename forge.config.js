@@ -4,60 +4,6 @@ require('dotenv').config();
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
-// --- START: Dynamic Maker Configuration ---
-let makers = [];
-
-if (process.platform === 'win32') {
-  makers = [
-    {
-      name: '@electron-forge/maker-squirrel',
-      config: {
-        name: "AnimeList",
-        setupIcon: './src/assets/app-logo.ico',
-      },
-    },
-  ];
-} else if (process.platform === 'darwin') {
-  makers = [
-    {
-      name: '@electron-forge/maker-dmg',
-      config: {
-        icon: './src/assets/app-logo.icns',
-        name: 'AnimeList'
-      },
-    },
-  ];
-} else if (process.platform === 'linux') {
-  makers = [
-    {
-      name: '@electron-forge/maker-deb',
-      config: {
-        options: {
-          maintainer: 'Xutron',
-          homepage: 'https://github.com/iamplayerexe/animelist',
-          icon: './src/assets/app-logo.png',
-          productName: 'AnimeList',
-          license: 'MIT'
-        }
-      },
-    },
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {
-        options: {
-          maintainer: 'Xutron',
-          homepage: 'https://github.com/iamplayerexe/animelist',
-          icon: './src/assets/app-logo.png',
-          productName: 'AnimeList',
-          license: 'MIT'
-        }
-      },
-    },
-  ];
-}
-// --- END: Dynamic Maker Configuration ---
-
-
 module.exports = {
   packagerConfig: {
     asar: true,
@@ -72,8 +18,27 @@ module.exports = {
 
   rebuildConfig: {},
 
-  // Use the dynamically determined makers array
-  makers: makers,
+  makers: [
+    // Create a zip for Windows containing the .exe and support files
+    {
+      name: '@electron-forge/maker-zip',
+      platforms: ['win32'],
+    },
+    // Create a DMG for macOS
+    {
+      name: '@electron-forge/maker-dmg',
+      platforms: ['darwin'],
+      config: {
+        name: 'AnimeList',
+        icon: './src/assets/app-logo.icns'
+      }
+    },
+    // Create a zip for Linux
+    {
+      name: '@electron-forge/maker-zip',
+      platforms: ['linux'],
+    }
+  ],
 
   plugins: [
     {
@@ -90,19 +55,4 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
-
-  publishers: [
-    {
-      name: '@electron-forge/publisher-github',
-      config: {
-        repository: {
-          owner: 'iamplayerexe',
-          name: 'animelist_app'
-        },
-        authToken: process.env.GITHUB_TOKEN,
-        prerelease: false,
-        draft: false
-      }
-    }
-  ]
 };
