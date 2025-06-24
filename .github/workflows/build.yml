@@ -66,7 +66,7 @@ jobs:
         shell: bash
         run: |
           # --- THIS IS THE FIX: Hardcode the correct private repository name ---
-          PRIVATE_REPO="iamplayerexe/zip_analyser_app"
+          PRIVATE_REPO="iamplayerexe/animelist_app"
           
           echo "Preparing to release version ${TAG} of ${APP_NAME} to ${PRIVATE_REPO}"
 
