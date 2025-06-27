@@ -1,4 +1,3 @@
-// <-- comment (.js file)(src/javascript/handlers/language-handler.js)
 // src/javascript/handlers/language-handler.js
 const { ipcRenderer } = require('electron');
 const state = require('../state');
@@ -198,7 +197,8 @@ async function setupLanguageSwitcher(_loadCards, _createTypeDropdown) {
     const defaultLang = 'en';
     try {
         console.log("Language Setup: Fetching translations...");
-        const response = await fetch('../languages.json');
+        // --- THIS IS THE FIX: Fetch from the remote Gist URL ---
+        const response = await fetch('https://gist.githubusercontent.com/iamplayerexe/2c2931f9dd92ab02cb04adfb1918f733/raw/languages.json');
         if (!response.ok) throw new Error(`HTTP ${response.status} loading languages.json`);
         const fetchedTranslations = await response.json();
         if (typeof fetchedTranslations !== 'object' || !fetchedTranslations?.[defaultLang]) throw new Error(`languages.json invalid or missing default '${defaultLang}' key.`);
@@ -220,4 +220,3 @@ async function setupLanguageSwitcher(_loadCards, _createTypeDropdown) {
 }
 
 module.exports = { setupLanguageSwitcher, translate };
-// <-- end comment (.js file)(src/javascript/handlers/language-handler.js)

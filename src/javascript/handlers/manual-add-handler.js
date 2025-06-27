@@ -1,17 +1,15 @@
 // src/javascript/handlers/manual-add-handler.js
 const { ipcRenderer } = require('electron');
 const Swal = require('sweetalert2');
-// Paths relative to the handlers directory
 const elements = require('../dom-elements');
-const state = require('../state'); // Require state module
+const state = require('../state');
 const { translate, Toast, setButtonSuccess, setButtonError } = require('../utils');
 
-// --- Constants Handling ---
 let constantsModule;
 let ALLOWED_SEASON_TYPES;
 let DEFAULT_SEASON_TYPE;
 try {
-    constantsModule = require('../constants'); // Path relative to handlers
+    constantsModule = require('../constants');
     if (!constantsModule || !constantsModule.ALLOWED_SEASON_TYPES || !constantsModule.DEFAULT_SEASON_TYPE) {
         throw new Error("Required constants not found.");
     }
@@ -22,19 +20,16 @@ try {
     ALLOWED_SEASON_TYPES = ['Season'];
     DEFAULT_SEASON_TYPE = 'Season';
 }
-// --- End Constants Handling ---
 
-// Function to show the detailed manual add dialog
 async function showManualAddDialog() {
-    // Retrieve loadCardsFunc reference from state
-    const loadCardsFunc = state.getLoadCardsFunction(); // <-- Use state getter
+    const loadCardsFunc = state.getLoadCardsFunction();
 
     if (!ALLOWED_SEASON_TYPES || !Array.isArray(ALLOWED_SEASON_TYPES) || ALLOWED_SEASON_TYPES.length === 0) {
         console.error("Manual Add Dialog Error: ALLOWED_SEASON_TYPES is not valid.", ALLOWED_SEASON_TYPES);
         Swal.fire({
             icon: 'error', title: translate('errorOccurred'),
             text: translate('errorLoadingSeasonTypes'),
-            background: '#333', color: '#FFF', confirmButtonColor: '#4488FF'
+            customClass: { popup: 'swal2-popup' }
         });
         return;
     }
@@ -47,20 +42,8 @@ async function showManualAddDialog() {
     });
 
     const { value: formValues } = await Swal.fire({
-        // Use the original title key, maybe update translation to clarify 'Manual'
-        title: translate('swalAddTitle'), // e.g., "Add New Anime (Manual)"
+        title: translate('swalAddTitle'),
         html: `
-          <style>
-            /* Styles copied from original file for brevity */
-            .swal-add-anime-popup .swal-input-row { display: flex; gap: 1em; margin-bottom: 1em; align-items: flex-start; }
-            .swal-add-anime-popup .swal-input-column { flex: 1; display: flex; flex-direction: column; }
-            .swal-add-anime-popup .swal-input-column .swal2-input-label { margin-bottom: 0.4em; text-align: left; display: block; font-size: 0.9em; color: #ccc; font-weight: 500; }
-            .swal-add-anime-popup .swal-input-column .swal2-input,
-            .swal-add-anime-popup .swal-input-column .swal2-select { width: 100% !important; margin: 0 !important; box-sizing: border-box; }
-            .swal-add-anime-popup .swal-full-width-input { width: 100% !important; box-sizing: border-box; margin-bottom: 1em !important; }
-            .swal-add-anime-popup .swal2-label { display: none; }
-            .swal-add-anime-popup .swal2-input:disabled { background-color: #555 !important; cursor: not-allowed; opacity: 0.7; }
-          </style>
           <input id="swal-input-name" class="swal2-input swal-full-width-input" placeholder="${translate('swalAddNamePlaceholder')}" required>
           <div class="swal-input-row">
             <div class="swal-input-column">
@@ -87,9 +70,8 @@ async function showManualAddDialog() {
         `,
         focusConfirm: false,
         width: '650px',
-        background: '#333', color: '#FFF',
-        confirmButtonColor: '#4488FF', confirmButtonText: translate('swalAddButton'),
-        showCancelButton: true, cancelButtonText: translate('swalCancelButton'), cancelButtonColor: '#6c757d',
+        confirmButtonText: translate('swalAddButton'),
+        showCancelButton: true, cancelButtonText: translate('swalCancelButton'),
         customClass: {
             popup: 'swal2-popup swal-add-anime-popup',
             htmlContainer: 'swal-add-html-container'
@@ -133,7 +115,10 @@ async function showManualAddDialog() {
     });
 
     if (formValues) {
-        const button = elements.addButton; // Use the main add button for feedback
+        // --- THIS IS THE FIX: Add entryName: null to the data sent to the main process ---
+        formValues.entryName = null; 
+        
+        const button = elements.addButton;
         if (!button) { console.error("Manual Add: Could not find addButton element for feedback."); return; }
         try {
             button.disabled = true;

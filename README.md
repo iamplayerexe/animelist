@@ -5,20 +5,19 @@
 </div>
 
 <p align="center">
+  <!-- Tech Stack -->
   <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="NodeJS"></a>
   <a href="https://www.electronjs.org/"><img src="https://img.shields.io/badge/Electron-26.6.10-%2347848F.svg?style=for-the-badge&logo=electron&logoColor=white" alt="Electron"></a>
   <a href="https://www.electronforge.io/"><img src="https://img.shields.io/badge/Electron%20Forge-7.8.0-%239B59B6.svg?style=for-the-badge&logo=electron&logoColor=white" alt="Electron Forge"></a>
   <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5"><img src="https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5"></a>
   <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"></a>
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"></a>
-  <a href="https://www.npmjs.com/"><img src="https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white" alt="NPM"></a>
-  <a href="https://github.com/sindresorhus/electron-store"><img src="https://img.shields.io/badge/electron_store-7.0.3-blue?style=for-the-badge" alt="electron-store"></a>
-  <a href="https://sweetalert2.github.io/"><img src="https://img.shields.io/badge/SweetAlert2-11.4.8-orange?style=for-the-badge" alt="SweetAlert2"></a>
+  <!-- License & Release -->
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License: MIT"></a>
-  <a href="https://github.com/iamplayerexe/animelist_app/releases"><img src="https://img.shields.io/github/v/release/iamplayerexe/animelist_app?style=for-the-badge" alt="Latest Release"></a>
+  <a href="https://github.com/iamplayerexe/xutroncore/releases/latest"><img src="https://img.shields.io/github/v/release/iamplayerexe/xutroncore?style=for-the-badge&label=Launcher" alt="Latest Launcher Release"></a>
 </p>
 
-> A simple, **offline-first** desktop application built with Electron for managing your personal anime watchlist without the fuss of complex websites. Keep track of seasons, movies, OAVs, specials, and more using manual entry or a faster **automatic mode** powered by a predefined local database. Designed for **Windows, Linux and Mac**.
+> A simple, **offline-first** desktop application for managing your personal anime watchlist. This app is part of the **XutronCore** application suite and is installed and updated exclusively through the **XutronCore Launcher**.
 
 ---
 
@@ -45,86 +44,80 @@
 
 ## ✨ Features Checklist
 
--   [x] 🖥️ **Cross-Platform:** Native installers for Windows, macOS, and Linux.
+-   [x] 🚀 **Centralized Management:** Installed and updated via the **XutronCore Launcher**.
+-   [x] 🖥️ **Cross-Platform:** Native support for Windows, macOS, and Linux.
 -   [x] ✨ **Manual Addition:** Add anime quickly (Title, Type, Number, Episodes).
--   [x] 🚀 **Automatic Addition:** Quickly add predefined anime entries (Seasons, Movies, OAVs etc.) from a local database.
+-   [x] 🚀 **Automatic Addition:** Quickly add predefined anime entries from a local database.
 -   [x] 🎨 **Automatic Cover Art:** Fetches cover art from Jikan API for manually added entries.
 -   [x] 📊 **Status & Progress Tracking:** Set status via dropdowns and track episodes with `+`/`-` buttons.
 -   [x] 🔍 **Filtering:** Sidebar filters for **Status** and **Type**.
 -   [x] 🌐 **Multi-language:** Supports 20 languages via a sidebar dropdown.
 -   [x] 💾 **Data Management:** Import/Export (`.json`) & Clear Data options.
 -   [x] 🔒 **Offline First:** Your data is stored locally and securely on your computer.
--   [x] 🔄 **Smart Updates:** Seamless auto-updates for Windows & macOS; update notifications for Linux.
 
 ---
 
-## 🎯 Why Choose Anime List ?
+## 🎯 Why Choose Anime List?
 
 > Simple, Fast, Private Anime Tracking.
 
 *   ✅ **Focus:** Tracks only what matters without website bloat.
-*   ⚡ **Speed:** Instant updates and list viewing - no waiting for web pages. **Automatic add** significantly speeds up adding large series.
+*   ⚡ **Speed:** Instant updates and list viewing - no waiting for web pages.
 *   🏠 **Privacy:** Your list lives entirely on your computer.
-*   🔌 **Offline Access:** Use it anywhere, anytime (images need an initial connection for manual entries).
+*   🔌 **Offline Access:** Use it anywhere, anytime (images need an initial connection).
+*   📦 **Ecosystem:** As part of the XutronCore suite, updates and installations are handled seamlessly by the launcher.
 
 ---
 
 ## 🚀 Getting Started
 
-> **Note:** Please download version **v1.2.0 or newer**. This is the first version with stable, cross-platform installers and auto-updates.
+> **Important:** This application can only be installed through the **XutronCore Launcher**. Standalone installers are no longer provided.
 
-1.  Go to the **[Releases Page](https://github.com/iamplayerexe/animelist_app/releases)**.
-2.  Download the correct installer for your operating system from the **Assets** section.
+### Step 1: Install the XutronCore Launcher
+If you don't have it yet, download and install the launcher first.
 
-<details>
-  <summary><strong>🪟 Windows Installation</strong></summary>
-  <br/>
-  <ol>
-    <li>Download the file ending in <code>-Setup.exe</code>.</li>
-    <li>Run the installer.</li>
-    <li>⚠️ <strong>Windows SmartScreen:</strong> If a warning appears, click "More info" → "Run anyway". This is because the application is not from a registered publisher.</li>
-    <li>Launch <strong>Anime List</strong>! The app will check for updates automatically.</li>
-  </ol>
-</details>
+1.  Go to the **[Latest Launcher Release Page](https://github.com/iamplayerexe/xutroncore/releases/latest)**.
+2.  Download the correct installer for your operating system (e.g., `.exe` for Windows, `.dmg` for macOS, `.deb` or `.AppImage` for Linux).
+3.  Run the installer to set up the XutronCore Launcher.
 
-<details>
-  <summary><strong>🍎 macOS Installation</strong></summary>
-  <br/>
-  <ol>
-    <li>Download the file ending in <code>.dmg</code>.</li>
-    <li>Open the <code>.dmg</code> file.</li>
-    <li>Drag the <strong>AnimeList</strong> app icon to the <strong>Applications</strong> folder shortcut.</li>
-    <li>⚠️ <strong>First Launch:</strong> You may need to <strong>right-click</strong> the app icon and select <strong>"Open"</strong>. If a warning appears, click the "Open" button on the dialog to proceed. You only need to do this once.</li>
-    <li>Launch the app normally from then on! It will update automatically.</li>
-  </ol>
-</details>
+### Step 2: Install Anime List from the Launcher
+Once the launcher is running, installing Anime List is simple.
 
-<details>
-  <summary><strong>🐧 Linux Installation</strong></summary>
-  <br/>
-  <ol>
-    <li>Download the appropriate package for your distribution:
-        <ul>
-            <li><code>.deb</code> for Debian, Ubuntu, Mint, etc.</li>
-            <li><code>.rpm</code> for Fedora, CentOS, etc.</li>
-        </ul>
-    </li>
-    <li><strong>To Install (GUI):</strong> Double-click the downloaded file to open it with your system's software installer.</li>
-    <li><strong>To Install (Terminal):</strong>
-        <ul>
-            <li>For <code>.deb</code>: <code>sudo dpkg -i file-name.deb</code> (then <code>sudo apt-get install -f</code> if needed).</li>
-            <li>For <code>.rpm</code>: <code>sudo dnf install file-name.rpm</code>.</li>
-        </ul>
-    </li>
-    <li>Launch the app. It will notify you when a new version is available for manual download.</li>
-  </ol>
-</details>
+1.  Open the **XutronCore Launcher**.
+2.  Find **Anime List** in the list of available applications.
+3.  Click the **Install** button.
+
+The launcher will handle the download and installation for you. To open the app, simply click **Launch** from the launcher interface!
+
+---
+
+## 📊 By the Numbers
+
+| Stat                  | Value                                  |
+| --------------------- | -------------------------------------- |
+| **Managed By**        | XutronCore Launcher                    |
+| **Supported Platforms** | Windows, macOS, Linux                  |
+| **App Updates**         | Automatic via Launcher                 |
+| **License**           | 100% Open Source (MIT)                 |
+| **Local Database**    | 40+ Predefined Anime Series            |
+
+---
+
+## 🆚 Comparison
+
+| Feature                         | Via XutronCore Launcher | Manual Installation |
+| ------------------------------- | :---------------------: | :-----------------: |
+| **Centralized Updates**         |            ✅           |          ❌         |
+| **One-Click Install/Uninstall** |            ✅           |          ❌         |
+| **Automatic Version Checks**    |            ✅           |          ❌         |
+| **Unified App Hub**             |            ✅           |          ❌         |
+| **Requires Manual Downloads**   |            ❌           |          ✅         |
 
 ---
 
 ## 📖 How to Use
 
-1.  🖱️ **Launch:** Open the app.
+1.  🖱️ **Launch:** Open the app from the XutronCore Launcher.
 2.  ➕ **Add Anime:** Click on **`+`** (navbar). You'll be prompted to choose:
     *   **Automatic:**
         1.  Select the main anime title from the grid.
@@ -149,20 +142,12 @@
 
 ## 🤝 Contributing
 
-Contributions are welcome! Found a bug or have an idea? Open an issue here:
-➡️ [**Issues Page**](https://github.com/iamplayerexe/animelist/issues)
+This repository contains the source code for the **Anime List** application itself. Contributions are welcome!
 
-Want to contribute code? (Requires Node.js & npm)
+➡️ [**Open an Issue or Feature Request for Anime List**](https://github.com/iamplayerexe/animelist/issues)
 
-1.  **Fork** the repository.
-2.  **Clone** your fork locally (`git clone ...`).
-3.  **Install Dependencies** (`cd animelist && npm install`).
-4.  **Create Branch** (`git checkout -b feature/YourUpdate`).
-5.  **Make Changes**.
-6.  **Test Locally** (`npm start`).
-7.  **Commit** (`git commit -m 'feat: Describe your feature'`).
-8.  **Push** (`git push origin feature/YourUpdate`).
-9.  **Open Pull Request** back to `iamplayerexe/animelist`.
+If you have an issue with the launcher, please visit its repository:
+*   **[XutronCore Launcher Repository](https://github.com/iamplayerexe/xutroncore-launcher)**
 
 ---
 

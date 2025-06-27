@@ -1,12 +1,10 @@
-// <-- comment (.js file)(src/main-process/anime-data-handler.js)
 // src/main-process/anime-data-handler.js
-const { ipcMain, dialog, net, app } = require('electron'); // 'app' is needed for getVersion()
+const { ipcMain, dialog, net, app } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const Store = require('electron-store');
 const { URL } = require('url');
 
-// Ensure constants are loaded correctly relative to app path
 let constants;
 try {
     const constantsPath = path.join(app.getAppPath(), 'src', 'javascript', 'constants.js');
@@ -20,7 +18,6 @@ try {
     }
 } catch(err) {
     console.error("CRITICAL ERROR loading constants:", err);
-    // Provide hardcoded fallbacks ONLY if loading fails completely
     constants = {
         ALLOWED_SEASON_TYPES: ['Season', 'OAV', 'Movie', 'Special', 'Scan', 'Non-Canon'],
         DEFAULT_SEASON_TYPE: 'Season',
@@ -33,7 +30,6 @@ try {
 
 const { ALLOWED_SEASON_TYPES, DEFAULT_SEASON_TYPE, DEFAULT_IMAGE } = constants;
 
-// --- Stores Initialization ---
 const animeStore = new Store({ name: 'animes', defaults: { animes: [] } });
 const settingsStore = new Store({ name: 'settings', defaults: { selectedLanguage: 'en' } });
 
@@ -41,12 +37,10 @@ console.log("Data Handler: Stores initialized.");
 console.log("Data Handler: Anime store path:", animeStore.path);
 console.log("Data Handler: Settings store path:", settingsStore.path);
 
-// --- Constants needed within this module ---
 const DEFAULT_IMAGE_PATH = path.join(app.getAppPath(), 'src', DEFAULT_IMAGE);
 const ALLOWED_STATUSES = constants.STATUS_OPTIONS || ['Plan to Watch', 'Watching', 'Completed', 'On Hold', 'Dropped'];
 const DEFAULT_STATUS = constants.DEFAULT_STATUS || 'Plan to Watch';
 
-// --- Jikan API Interaction ---
 const JIKAN_API_BASE = 'https://api.jikan.moe/v4';
 let lastApiCallTime = 0;
 const API_CALL_DELAY = 500;
@@ -104,7 +98,6 @@ async function searchAnimeImage(title, seasonNumber = null) {
     let foundImage = await executeSearch(primarySearchQuery); if (foundImage) return foundImage; if (specificSearchQuery) { foundImage = await executeSearch(specificSearchQuery); if (foundImage) return foundImage; } if (baseTitleQuery) { foundImage = await executeSearch(baseTitleQuery); if (foundImage) return foundImage; } console.log(`Image search failed for: "${title}" (Season: ${seasonNumber})`); return null;
 }
 
-// --- Data Integrity ---
 const runIntegrityCheck = (animesList) => {
     let changed = false; if (!Array.isArray(animesList)) return { checkedAnimes: [], changed: true };
     const checkedAnimes = animesList.map(anime => {
@@ -120,18 +113,99 @@ const updateAnimesIntegrity = () => {
     } catch (error) { console.error("Error during integrity check:", error); }
 };
 
-// --- File I/O ---
 const readImportFile = (filePath) => { try { if (!fs.existsSync(filePath)) return { success: false, error: 'File not found.' }; const data = fs.readFileSync(filePath, 'utf-8'); if (!data.trim()) return { success: false, error: 'File is empty.' }; const content = JSON.parse(data); if (!Array.isArray(content)) return { success: false, error: 'Imported file does not contain a valid JSON array.' }; return { success: true, data: content }; } catch (error) { console.error(`Error reading/parsing import file ${filePath}:`, error.message); const errorReason = error instanceof SyntaxError ? 'Invalid JSON format' : error.message; return { success: false, error: `Error reading import file: ${errorReason}` }; } };
 const writeExportFile = (dataToWrite, filePath) => { try { const dir = path.dirname(filePath); if (!fs.existsSync(dir)) { fs.mkdirSync(dir, { recursive: true }); } fs.writeFileSync(filePath, JSON.stringify(dataToWrite, null, 2), 'utf-8'); console.log(`Successfully wrote export data to ${path.basename(filePath)}`); return { success: true }; } catch (error) { console.error(`Error writing export file ${filePath}:`, error.message); return { success: false, error: `File write error (${path.basename(filePath)}): ${error.message}` }; } };
 
-// --- Initialization Function ---
 function initializeDataHandlers(mainWindowRef) {
     console.log("Initializing Data Handlers...");
-    updateAnimesIntegrity(); // Run check on startup
+    updateAnimesIntegrity();
 
-    // --- Register IPC Handlers ---
     ipcMain.handle('getAnimes', async () => { try { const animes = animeStore.get('animes'); if (!Array.isArray(animes)) { console.warn('[IPC getAnimes] Data from store is not an array, returning empty array.'); return []; } return animes; } catch (error) { console.error("[IPC getAnimes] Error getting animes:", error); return []; } });
-    ipcMain.handle('addAnimeEntry', async (event, animeData) => { if (!animeData?.name?.trim() || !animeData.seasonType || !ALLOWED_SEASON_TYPES.includes(animeData.seasonType) || typeof animeData.totalEpisodes === 'undefined') { return { success: false, error: 'Invalid input data.' }; } let seasonNumber = null; let totalEpisodes = parseInt(animeData.totalEpisodes, 10); if (animeData.seasonType === 'Season') { const p = parseInt(animeData.seasonNumber, 10); if (isNaN(p) || p < 1) { return { success: false, error: 'swalValidationSeasonNumber' }; } seasonNumber = p; } else if (animeData.seasonNumber !== null && animeData.seasonNumber !== undefined && String(animeData.seasonNumber).trim() !== '') { const p = parseInt(animeData.seasonNumber, 10); if (isNaN(p) || p < 0) { return { success: false, error: 'Invalid number.' }; } seasonNumber = p; } if (isNaN(totalEpisodes) || totalEpisodes < 0) { return { success: false, error: 'Invalid total episodes.' }; } if (animeData.seasonType === 'Movie') { totalEpisodes = 1; } try { let animes = animeStore.get('animes'); if (!Array.isArray(animes)) animes = []; const newId = `anime_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`; const animeName = animeData.name.trim(); let finalImageUrl = DEFAULT_IMAGE_PATH; const providedImageUrl = animeData.image?.trim(); if (providedImageUrl && providedImageUrl.startsWith('http')) { finalImageUrl = providedImageUrl; } else { try { const searchSN = (animeData.seasonType === 'Season' && seasonNumber !== null) ? seasonNumber : null; const foundImage = await searchAnimeImage(animeName, searchSN); if (foundImage) { finalImageUrl = foundImage; } } catch (searchError) { console.error(`[IPC addAnimeEntry] Jikan search error:`, searchError); } } const newAnime = { id: newId, name: animeName, image: finalImageUrl, seasonType: animeData.seasonType, seasonNumber: seasonNumber, totalEpisodes: totalEpisodes, watchedEpisodes: 0, status: DEFAULT_STATUS }; const exists = animes.some(a => a?.name?.toLowerCase() === newAnime.name.toLowerCase() && a.seasonType === newAnime.seasonType && a.seasonNumber === newAnime.seasonNumber); if (exists) { const duplicateIdentifier = `${newAnime.name} (${newAnime.seasonType}${newAnime.seasonNumber !== null ? ' '+newAnime.seasonNumber : ''})`; return { success: false, error: `"${duplicateIdentifier}" already exists.` }; } animes.push(newAnime); animeStore.set('animes', animes); return { success: true, animeInfo: newAnime }; } catch (error) { console.error("[IPC addAnimeEntry] Error adding anime:", error); return { success: false, error: `Error saving: ${error.message}` }; } });
+    
+    // --- THIS IS THE FIX: Modified to accept and store 'entryName' ---
+    ipcMain.handle('addAnimeEntry', async (event, animeData) => { 
+        if (!animeData?.name?.trim() || !animeData.seasonType || !ALLOWED_SEASON_TYPES.includes(animeData.seasonType) || typeof animeData.totalEpisodes === 'undefined') { 
+            return { success: false, error: 'Invalid input data.' }; 
+        } 
+        
+        let seasonNumber = null; 
+        let totalEpisodes = parseInt(animeData.totalEpisodes, 10); 
+        
+        if (animeData.seasonType === 'Season') { 
+            const p = parseInt(animeData.seasonNumber, 10); 
+            if (isNaN(p) || p < 1) { return { success: false, error: 'swalValidationSeasonNumber' }; } 
+            seasonNumber = p; 
+        } else if (animeData.seasonNumber !== null && animeData.seasonNumber !== undefined && String(animeData.seasonNumber).trim() !== '') { 
+            const p = parseInt(animeData.seasonNumber, 10); 
+            if (isNaN(p) || p < 0) { return { success: false, error: 'Invalid number.' }; } 
+            seasonNumber = p; 
+        } 
+        
+        if (isNaN(totalEpisodes) || totalEpisodes < 0) { 
+            return { success: false, error: 'Invalid total episodes.' }; 
+        } 
+        if (animeData.seasonType === 'Movie') { totalEpisodes = 1; } 
+        
+        try { 
+            let animes = animeStore.get('animes'); 
+            if (!Array.isArray(animes)) animes = []; 
+            
+            const newId = `anime_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`; 
+            const animeName = animeData.name.trim(); 
+            const entryName = animeData.entryName?.trim() || null; // Capture the new entryName field
+            
+            let finalImageUrl = DEFAULT_IMAGE_PATH; 
+            const providedImageUrl = animeData.image?.trim(); 
+            
+            if (providedImageUrl && providedImageUrl.startsWith('http')) { 
+                finalImageUrl = providedImageUrl; 
+            } else { 
+                try { 
+                    const searchSN = (animeData.seasonType === 'Season' && seasonNumber !== null) ? seasonNumber : null; 
+                    const foundImage = await searchAnimeImage(animeName, searchSN); 
+                    if (foundImage) { finalImageUrl = foundImage; } 
+                } catch (searchError) { 
+                    console.error(`[IPC addAnimeEntry] Jikan search error:`, searchError); 
+                } 
+            } 
+            
+            const newAnime = { 
+                id: newId, 
+                name: animeName, 
+                entryName: entryName, // Store the new field
+                image: finalImageUrl, 
+                seasonType: animeData.seasonType, 
+                seasonNumber: seasonNumber, 
+                totalEpisodes: totalEpisodes, 
+                watchedEpisodes: 0, 
+                status: DEFAULT_STATUS 
+            }; 
+            
+            // Check for duplicates based on entryName if it exists, otherwise use old logic
+            const exists = animes.some(a => {
+                const sameMainName = a.name?.toLowerCase() === newAnime.name.toLowerCase();
+                const sameType = a.seasonType === newAnime.seasonType;
+                const sameNumber = a.seasonNumber === newAnime.seasonNumber;
+                if (entryName) {
+                    return a.entryName?.toLowerCase() === entryName.toLowerCase() && sameMainName;
+                }
+                return sameMainName && sameType && sameNumber;
+            });
+
+            if (exists) { 
+                const duplicateIdentifier = entryName || `${newAnime.name} (${newAnime.seasonType}${newAnime.seasonNumber !== null ? ' '+newAnime.seasonNumber : ''})`;
+                return { success: false, error: `"${duplicateIdentifier}" already exists.` }; 
+            } 
+            
+            animes.push(newAnime); 
+            animeStore.set('animes', animes); 
+            return { success: true, animeInfo: newAnime }; 
+        } catch (error) { 
+            console.error("[IPC addAnimeEntry] Error adding anime:", error); 
+            return { success: false, error: `Error saving: ${error.message}` }; 
+        } 
+    });
+
     ipcMain.handle('updateWatchedEpisodes', async (event, animeId, newWatchedCount) => { if (animeId === undefined || newWatchedCount === undefined) return { success: false, error: 'Missing data.' }; try { let animes = animeStore.get('animes'); if (!Array.isArray(animes)) return { success: false, error: 'No data.' }; const idx = animes.findIndex(a => a.id === animeId); if (idx === -1) return { success: false, error: 'Not found.' }; const anime = { ...animes[idx] }; const origS = anime.status || DEFAULT_STATUS; const origW = anime.watchedEpisodes ?? 0; const totalE = anime.totalEpisodes ?? 0; const maxW = (anime.seasonType === 'Movie') ? 1 : totalE; const valC = parseInt(newWatchedCount, 10); let finalC = origW; if (!isNaN(valC)) { finalC = Math.max(0, Math.min(valC, maxW)); } else { return { success: false, error: 'Invalid count.' }; } const countCh = origW !== finalC; let statusCh = false; if (countCh) { if (finalC === totalE && totalE > 0 && origS !== 'Completed') { anime.status = 'Completed'; statusCh = true; } else if (finalC < totalE && origS === 'Completed') { anime.status = 'Watching'; statusCh = true; } else if (finalC > 0 && origS === 'Plan to Watch') { anime.status = 'Watching'; statusCh = true; } else if (anime.seasonType === 'Movie') { if (finalC === 1 && origS !== 'Completed') { anime.status = 'Completed'; statusCh = true; } else if (finalC === 0 && origW === 1 && origS === 'Completed') { anime.status = 'Watching'; statusCh = true; } } } anime.watchedEpisodes = finalC; if (countCh || statusCh) { animes[idx] = anime; animeStore.set('animes', animes); return { success: true, updatedAnime: anime }; } else { return { success: true, updatedAnime: animes[idx] }; } } catch (error) { console.error("Error updating watched episodes:", error); return { success: false, error: `Save error: ${error.message}` }; } });
     ipcMain.handle('updateTotalEpisodes', async (event, animeId, newTotalCount) => { if (typeof animeId === 'undefined' || typeof newTotalCount === 'undefined') return { success: false, error: 'Missing data for total episode update.' }; const totalEpisodes = parseInt(newTotalCount, 10); if (isNaN(totalEpisodes) || totalEpisodes < 0) return { success: false, error: 'Invalid total episode count provided (must be >= 0).' }; try { let animes = animeStore.get('animes'); if (!Array.isArray(animes)) return { success: false, error: 'Could not read anime data.' }; const idx = animes.findIndex(a => a.id === animeId); if (idx === -1) return { success: false, error: 'Anime not found.' }; const anime = { ...animes[idx] }; const origTot = anime.totalEpisodes ?? 0; const origWat = anime.watchedEpisodes ?? 0; let watchCh = false; let statusCh = false; if (anime.seasonType === 'Movie') { return { success: false, error: 'Cannot change total episodes for Movie type.' }; } const totalCh = origTot !== totalEpisodes; if (totalCh) { anime.totalEpisodes = totalEpisodes; if (origWat > totalEpisodes) { anime.watchedEpisodes = totalEpisodes; watchCh = true; } const curStat = anime.status || DEFAULT_STATUS; const curWat = anime.watchedEpisodes; if (totalEpisodes > 0 && curWat === totalEpisodes && curStat !== 'Completed') { anime.status = 'Completed'; statusCh = true; } else if (curWat < totalEpisodes && curStat === 'Completed') { anime.status = 'Watching'; statusCh = true; } } if (totalCh || watchCh || statusCh) { animes[idx] = anime; animeStore.set('animes', animes); return { success: true, updatedAnime: anime }; } else { return { success: true, updatedAnime: animes[idx] }; } } catch (error) { console.error("Error updating total episodes:", error); return { success: false, error: `Save error: ${error.message}` }; } });
     ipcMain.handle('updateAnimeStatus', async (event, animeId, newStatus) => { if (!animeId || !newStatus || !ALLOWED_STATUSES.includes(newStatus)) return { success: false, error: "Invalid data." }; try { let animes = animeStore.get('animes'); if (!Array.isArray(animes)) return { success: false, error: 'No data.' }; const idx = animes.findIndex(a => a.id === animeId); if (idx === -1) return { success: false, error: 'Not found.' }; const anime = { ...animes[idx] }; const origS = anime.status; let epsCh = false; if (newStatus === 'Completed' && anime.watchedEpisodes !== anime.totalEpisodes) { if (anime.seasonType === 'Movie' && anime.watchedEpisodes !== 1) { anime.watchedEpisodes = 1; epsCh = true; } else if (anime.seasonType !== 'Movie') { anime.watchedEpisodes = anime.totalEpisodes ?? 0; epsCh = true; } } else if (newStatus === 'Plan to Watch' && anime.watchedEpisodes !== 0) { anime.watchedEpisodes = 0; epsCh = true; } const statusCh = origS !== newStatus; if (statusCh) anime.status = newStatus; if (statusCh || epsCh) { animes[idx] = anime; animeStore.set('animes', animes); return { success: true, updatedAnime: anime }; } else { return { success: true, updatedAnime: animes[idx] }; } } catch (error) { console.error("Error updating status:", error); return { success: false, error: `Save error: ${error.message}` }; } });
@@ -143,16 +217,12 @@ function initializeDataHandlers(mainWindowRef) {
     ipcMain.handle('getLanguagePreference', async () => { try { const lang = settingsStore.get('selectedLanguage'); return typeof lang === 'string' ? lang : 'en'; } catch (error) { console.error("Error getting language preference:", error); return 'en'; } });
     ipcMain.handle('saveLanguagePreference', async (event, langCode) => { try { if (typeof langCode === 'string' && langCode.length > 0) { settingsStore.set('selectedLanguage', langCode); return { success: true }; } else { return { success: false, error: 'Invalid language code provided.' }; } } catch (error) { console.error("Error saving language preference:", error); return { success: false, error: `Save error: ${error.message}` }; } });
 
-    // ---> ADDED HANDLER FOR APP VERSION <---
     ipcMain.handle('get-app-version', () => {
         console.log("[IPC] get-app-version requested");
-        return app.getVersion(); // Returns the version from package.json
+        return app.getVersion();
     });
-    // ---> END ADDED HANDLER <---
 
     console.log("Data Handlers Initialized.");
-} // End initializeDataHandlers
+}
 
 module.exports = { initializeDataHandlers };
-// <-- end comment (.js file)(src/main-process/anime-data-handler.js)
-// <-- end comment (.js file)(src/main-process/anime-data-handler.js)

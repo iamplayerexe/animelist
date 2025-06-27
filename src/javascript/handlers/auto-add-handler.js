@@ -1,3 +1,4 @@
+// src/javascript/handlers/auto-add-handler.js
 const { ipcRenderer } = require('electron');
 const elements = require('../dom-elements');
 const state = require('../state');
@@ -29,8 +30,8 @@ async function loadPredefinedData() {
     isLoadingData = true;
     console.log("AutoAdd: Fetching predefined anime data...");
     try {
-        const response = await fetch('./data/animes.json');
-        if (!response.ok) throw new Error(`HTTP error ${response.status} loading ./data/animes.json`);
+        const response = await fetch('https://gist.githubusercontent.com/iamplayerexe/c5211fca119c76d084e19f03b6de3b81/raw/animes.json');
+        if (!response.ok) throw new Error(`HTTP error ${response.status} loading predefined animes`);
         const data = await response.json();
         if (!data || typeof data.animes !== 'object') throw new Error("Invalid format in animes.json");
         predefinedAnimeData = data.animes;
@@ -165,8 +166,18 @@ async function renderAutoAddView(step = 'title') {
                         type: type,
                         number: entryNumber,
                         name: entry.name?.trim() || `${currentDisplayTitle} ${type}${entryNumber !== null ? ' '+entryNumber : ''}`.trim(),
-                        max_episodes: (!isNaN(maxEp) && maxEp >= 0) ? maxEp : (type === 'Movie' ? 1 : 0)
+                        max_episodes: (!isNaN(maxEp) && maxEp >= 0) ? maxEp : (type === 'Movie' ? 1 : 0),
+                        image: entry.image || entriesData.image || constants.DEFAULT_IMAGE
                     };
+
+                    const imageEl = document.createElement('img');
+                    imageEl.className = 'entry-card-image';
+                    imageEl.src = entryData.image;
+                    imageEl.alt = entryData.name;
+                    imageEl.onerror = () => { imageEl.src = constants.DEFAULT_IMAGE; };
+
+                    const textContainer = document.createElement('div');
+                    textContainer.className = 'entry-card-text-container';
 
                     let numberPart = entryNumber !== null ? ` ${entryNumber}` : ''; const defaultConstructedName = `${translate(`seasonType${type.replace('-', '')}`)}${numberPart}`.trim();
                     const typeDiv = document.createElement('div'); typeDiv.className = 'entry-card-type'; typeDiv.textContent = translate(`seasonType${type.replace('-', '')}`);
@@ -188,7 +199,8 @@ async function renderAutoAddView(step = 'title') {
                     }
                     episodesDiv.textContent = fullEpisodeText;
 
-                    item.append(typeDiv, nameDiv, episodesDiv);
+                    textContainer.append(typeDiv, nameDiv, episodesDiv);
+                    item.append(imageEl, textContainer);
 
                     const isGloballySelected = globallySelectedEntries.some(sel => sel.uniqueId === entryUniqueId);
                     if (isGloballySelected) { item.classList.add('selected'); selectedEntriesForTitle++; }
@@ -226,7 +238,8 @@ async function renderAutoAddView(step = 'title') {
                 const entryData = {
                     uniqueId: currentEntryUniqueId, title: title, type: type, number: number,
                     name: baseEntry.name?.trim() || `${title} ${type}${number !== null ? ' '+number : ''}`.trim(),
-                    max_episodes: (!isNaN(maxEp) && maxEp >= 0) ? maxEp : (type === 'Movie' ? 1 : 0)
+                    max_episodes: (!isNaN(maxEp) && maxEp >= 0) ? maxEp : (type === 'Movie' ? 1 : 0),
+                    image: baseEntry.image || predefinedAnimeData[title]?.image || constants.DEFAULT_IMAGE
                 };
                 if (shouldSelectAll && !alreadySelected) {
                     item.classList.add('selected');
@@ -262,12 +275,14 @@ async function confirmAddSelectedEntries() {
 
      for (const entry of entriesToAdd) {
          const mainAnimeImageData = predefinedAnimeData?.[entry.title]?.image || '';
+         // --- THIS IS THE FIX: Send 'name' as main title and 'entryName' as specific name ---
          const animeData = {
-             name: entry.title,
+             name: entry.title,       // e.g., "Naruto"
+             entryName: entry.name,   // e.g., "Naruto (Original Series)"
              seasonType: entry.type,
              seasonNumber: entry.number,
              totalEpisodes: entry.max_episodes,
-             image: mainAnimeImageData
+             image: entry.image || mainAnimeImageData
          };
          try { const result = await ipcRenderer.invoke('addAnimeEntry', animeData); if (result.success) successCount++; else { errorCount++; const err = translate(result.error, { fallback: result.error || translate('toastAddedError') }); if (!firstErrorMsg) firstErrorMsg = err; console.warn(`Failed add ${entry.uniqueId}: ${result.error}`); } }
          catch (error) { errorCount++; if (!firstErrorMsg) firstErrorMsg = translate('toastErrorIPC'); console.error(`IPC Error add ${entry.uniqueId}:`, error); }

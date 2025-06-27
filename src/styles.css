@@ -1,7 +1,6 @@
-/* src/styles.css (Main Import File) */
-
+@import url('./css/colors.css');
 @import url('./css/loading-screen.css');
-@import url('./css/language-selector.css'); /* Should already be here */
+@import url('./css/language-selector.css');
 @import url('./css/base.css');
 @import url('./css/animations.css');
 @import url('./css/titlebar.css');
@@ -10,6 +9,6 @@
 @import url('./css/navbar.css');
 @import url('./css/cards.css');
 @import url('./css/data-view.css');
-@import url('./css/auto-add-view.css'); /* << ADD THIS LINE */
+@import url('./css/auto-add-view.css');
 @import url('./css/footer.css');
 @import url('./css/sweetalert-theme.css');

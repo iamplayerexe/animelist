@@ -1,7 +1,8 @@
+/* src/css/language-selector.css */
 #language-selector-container {
   margin-top: auto;
-  padding: 10px var(--sidebar-padding-horizontal, 15px);
-  border-top: 1px solid #444;
+  padding: 10px 15px;
+  border-top: 1px solid var(--border-primary);
   position: relative;
   box-sizing: border-box;
 }
@@ -12,9 +13,9 @@
   width: 100%;
   padding: 8px 12px;
   font-size: 0.95em;
-  color: #ccc;
-  background-color: #3a3f44;
-  border: 1px solid #555;
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   cursor: pointer;
   text-align: left;
@@ -24,15 +25,16 @@
 }
 
 .language-selector-button:hover {
-  background-color: #4a4f54;
-  border-color: #777;
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-primary);
 }
 
-.language-selector-button:focus {
+/* --- THIS IS THE FIX: Replaced :focus with :focus-visible --- */
+/* .language-selector-button:focus-visible {
   outline: none;
-  border-color: var(--swal-primary-color);
-  box-shadow: 0 0 0 2px rgba(68, 136, 255, 0.3);
-}
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 2px var(--accent-purple-shadow);
+} */
 
 .lang-flag-emoji-container {
     display: inline-flex;
@@ -59,7 +61,7 @@
 .language-selector-button::after {
   content: '▼';
   font-size: 0.7em;
-  color: #aaa;
+  color: var(--text-muted);
   margin-left: auto;
   padding-left: 8px;
   transition: transform 0.2s ease-in-out;
@@ -73,15 +75,15 @@
   display: none;
   position: absolute;
   bottom: calc(100% + 5px);
-  left: var(--sidebar-padding-horizontal, 15px);
-  right: var(--sidebar-padding-horizontal, 15px);
-  background-color: #33373c;
-  border: 1px solid #555;
+  left: 15px;
+  right: 15px;
+  background-color: var(--dropdown-bg);
+  border: 1px solid var(--border-primary);
   border-radius: 4px;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 -4px 10px var(--shadow-primary);
   z-index: 1150;
-  max-height: 200px; /* Limit height to enable scrolling */
-  overflow-y: auto; /* Ensure scrolling is enabled */
+  max-height: 200px;
+  overflow-y: auto;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -96,38 +98,35 @@
   display: flex;
   align-items: center;
   padding: 10px 12px;
-  color: #ccc;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: background-color 0.15s;
   white-space: nowrap;
 }
 
 .language-option:hover {
-  background-color: #4a4f54;
-  color: #fff;
+  background-color: var(--dropdown-hover-bg);
+  color: var(--text-primary);
 }
 
 .language-option > span {
     pointer-events: none;
 }
 
-/* --- ADDED: Custom Scrollbar for Language List --- */
 .language-options-list::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  width: 8px;
 }
 
 .language-options-list::-webkit-scrollbar-track {
-  background: #2a2e33; /* Slightly darker than the list background */
-  border-radius: 4px; /* Match list radius */
+  background: var(--scrollbar-track);
+  border-radius: 4px;
 }
 
 .language-options-list::-webkit-scrollbar-thumb {
-  background-color: #666; /* Scrollbar handle color */
+  background-color: var(--scrollbar-thumb);
   border-radius: 4px;
-  border: 2px solid #2a2e33; /* Create padding around thumb */
 }
 
 .language-options-list::-webkit-scrollbar-thumb:hover {
-  background-color: #888; /* Slightly lighter on hover */
+  background-color: var(--scrollbar-thumb-hover);
 }
-/* --- END: Custom Scrollbar --- */

@@ -1,0 +1,93 @@
+/* src/css/colors.css */
+:root {
+  /* =================================
+     Light Theme
+     ================================= */
+  /* --- Core Palette --- */
+  --bg-primary: #f9fafb;
+  --bg-secondary: #f3f4f6;
+  --bg-tertiary: #e5e7eb;
+  --card-bg: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --shadow-primary: rgba(0, 0, 0, 0.05);
+
+  /* --- Accent & Status Colors --- */
+  --accent-purple: #8b5cf6;
+  --accent-purple-hover: #7c3aed;
+  --accent-purple-text: #ffffff;
+  --accent-purple-shadow: rgba(139, 92, 246, 0.3);
+  --accent-purple-transparent: rgba(139, 92, 246, 0.1);
+  --accent-purple-transparent-strong: rgba(139, 92, 246, 0.2);
+  --success: #10b981;
+  --success-text: #ffffff;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-text: #ffffff;
+  --cancel: #6b7280;
+  --cancel-hover: #4b5563;
+  --cancel-text: #ffffff;
+
+  /* --- Title Animation (Orange) --- */
+  --title-primary: #f97316;
+  --title-reflection: #ffedd5;
+  --title-shadow: rgba(249, 115, 22, 0.6);
+  --title-glow-inner: rgba(255, 237, 213, 0.9);
+  --title-glow-outer: rgba(194, 65, 12, 0.9);
+
+  /* --- Components --- */
+  --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: #c1c1c1;
+  --scrollbar-thumb-hover: #a8a8a8;
+  --dropdown-bg: #ffffff;
+  --dropdown-hover-bg: #f3f4f6;
+  --button-bg: #ffffff;
+  --button-hover-bg: #f9fafb;
+  --sidebar-bg: #f9fafb;
+  --icon-stroke: #374151;
+  --icon-close-hover-bg: #e81123;
+  --icon-close-hover-stroke: #ffffff;
+  --sun-color: #f59e0b;
+  --moon-color: #818cf8;
+
+  /* --- Loading Screen --- */
+  --loading-logo-filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+  --loading-pulse-1: rgba(0, 0, 0, 0.2);
+  --loading-pulse-2: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] {
+  /* =================================
+     Dark Theme
+     ================================= */
+  /* --- Core Palette --- */
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --card-bg: #1f2937;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+  --shadow-primary: rgba(0, 0, 0, 0.25);
+  
+  /* --- Components --- */
+  --scrollbar-track: #2a2e33;
+  --scrollbar-thumb: #555;
+  --scrollbar-thumb-hover: #777;
+  --dropdown-bg: #1f2937;
+  --dropdown-hover-bg: #374151;
+  --button-bg: #374151;
+  --button-hover-bg: #4b5563;
+  --sidebar-bg: #1f2937;
+  --icon-stroke: #9ca3af;
+  
+  /* --- Loading Screen --- */
+  --loading-logo-filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+  --loading-pulse-1: rgba(255, 255, 255, 0.4);
+  --loading-pulse-2: rgba(255, 255, 255, 0.2);
+}

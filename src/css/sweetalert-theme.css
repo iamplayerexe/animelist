@@ -1,212 +1,296 @@
-/* <-- comment (.css file)(src/css/sweetalert-theme.css) */
-/* sweetalert-theme.css */
-
-/* Base Popup */
+/* src/css/sweetalert-theme.css */
 .swal2-popup {
-  background: linear-gradient(to bottom, #404040, #353535) !important;
-  color: #e8e8e8 !important;
-  border-radius: 12px !important; /* Round corners */
-  border: 1px solid var(--swal-border-color);
-  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(90, 90, 90, 0.6) !important;
-  width: auto !important;
-  max-width: 550px !important; /* Increase max-width slightly if needed */
-  padding: 1.5em !important; /* Adjust padding */
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 12px 50px var(--shadow-primary) !important;
+  padding: 1.5em !important;
 }
 
-/* HTML Container */
+div.swal2-radio {
+  background: none !important;
+}
+
+.details-popup.swal2-popup {
+  width: 480px !important;
+  max-width: 90vw !important;
+}
+
+.swal2-title {
+  color: var(--text-primary) !important;
+  word-break: break-word;
+}
+
 .swal2-html-container,
 .swal2-content {
-  background-color: transparent !important;
-  background: transparent !important;
-  color: inherit !important;
-  margin: 0 !important; /* Remove default margin */
+  color: var(--text-secondary) !important;
+  margin: 1em 0 0 0 !important;
   padding: 0 !important;
-  text-align: initial !important; /* Reset text align */
+  text-align: center !important;
 }
 
-/* --- Detail Card Specific Styles --- */
-.details-popup.swal2-popup {
-    padding: 1.5em !important; /* Consistent padding */
-}
-
-/* Image (Top Center) */
-.details-popup .swal2-image { /* Target image specifically in details popup */
-  border-radius: 8px; /* Round corners */
-  border: 1px solid var(--swal-border-color);
-  max-height: 180px !important; /* Control max height */
-  max-width: 80%; /* Don't let it span full width */
-  object-fit: contain; /* Fit image inside bounds */
-  display: block;
-  margin: 0 auto 15px auto !important; /* Center horizontally, margin below */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  padding: 0 !important; /* Remove default swal image padding */
-}
-/* Removed .swal-details-image-container as swal2-image is targeted directly */
-
-
-/* Title (Below Image, Centered) */
-.details-popup .swal2-title {
-  color: #ffffff !important;
-  padding: 0 0 0.7em 0 !important; /* Padding below */
-  margin: 0 0 0.8em 0 !important; /* Margin below */
-  font-size: 1.5em !important; /* Adjust size */
+/* --- Buttons --- */
+.swal2-actions button {
+  border-radius: 6px !important;
+  padding: 0.75em 1.6em !important;
+  font-size: 0.95em !important;
   font-weight: 600 !important;
-  border-bottom: 1px solid var(--swal-border-color);
-  text-align: center; /* Center title */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  border: 1px solid transparent !important;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px var(--shadow-primary);
 }
 
-/* Information Square */
-.details-popup .swal-details-content {
-  background-color: #2f3338 !important; /* Darker background */
-  padding: 1em 1.2em !important; /* Padding inside */
-  border-radius: 8px !important; /* Round corners */
-  margin: 0 auto 1.5em auto !important; /* Center block, margin below */
-  text-align: left !important; /* Align text left */
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
-  border: 1px solid #4a4f54;
-  /* --- MODIFIED --- */
-  display: inline-block; /* Allows margin:auto centering and width based on content */
-  width: auto;          /* Remove fixed percentage width */
-  min-width: 300px;     /* Add a minimum width if desired */
-  max-width: 100%;      /* Prevent overflow */
-  box-sizing: border-box;
-  /* --- END MODIFIED --- */
+.swal2-actions button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px var(--shadow-primary);
 }
 
-/* --- NEW: Detail Row Styling (Using Grid) --- */
+.swal2-actions button:active {
+  transform: scale(0.98);
+}
+
+/* Default 'Confirm' button (Purple Outline) */
+button.swal2-confirm {
+  background-color: transparent !important;
+  color: var(--accent-purple) !important;
+  border-color: var(--accent-purple) !important;
+}
+
+button.swal2-confirm:hover {
+  background-color: var(--accent-purple) !important;
+  border-color: var(--accent-purple) !important;
+  color: var(--accent-purple-text) !important;
+}
+
+/* 'Cancel' or secondary action button (Outline) */
+button.swal2-cancel {
+  background-color: transparent !important;
+  color: var(--text-muted) !important;
+  border-color: var(--border-secondary) !important;
+}
+
+button.swal2-cancel:hover {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* 'Deny' or destructive action button (Red Outline) */
+button.swal2-deny {
+  background-color: transparent !important;
+  color: var(--danger) !important;
+  border-color: var(--danger) !important;
+}
+
+button.swal2-deny:hover {
+  background-color: var(--danger) !important;
+  color: var(--danger-text) !important;
+}
+
+.details-popup button.swal2-confirm,
+.choice-popup button.swal2-confirm,
+.import-mode-popup button.swal2-confirm,
+.import-final-confirm-popup button.swal2-confirm,
+.swal-add-anime-popup button.swal2-confirm {
+  background-color: transparent !important;
+  color: var(--accent-purple) !important;
+  border-color: var(--accent-purple) !important;
+}
+
+.details-popup button.swal2-confirm:hover,
+.choice-popup button.swal2-confirm:hover,
+.import-mode-popup button.swal2-confirm:hover,
+.import-final-confirm-popup button.swal2-confirm:hover,
+.swal-add-anime-popup button.swal2-confirm:hover {
+  background-color: var(--accent-purple) !important;
+  color: var(--accent-purple-text) !important;
+}
+
+
+.clear-data-popup button.swal2-confirm {
+  background-color: transparent !important;
+  color: var(--danger) !important;
+  border-color: var(--danger) !important;
+}
+
+.clear-data-popup button.swal2-confirm:hover {
+  background-color: var(--danger) !important;
+  color: var(--danger-text) !important;
+}
+
+
+/* --- Inputs & Selections --- */
+.swal2-input,
+.swal2-textarea,
+.swal2-select {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-secondary) !important;
+  border-radius: 6px !important;
+  padding: 0.8em 1em !important;
+  font-size: 1em !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s;
+}
+
+/* --- THIS IS THE FIX: Replaced :focus with :focus-visible --- */
+/* .swal2-input:focus-visible,
+.swal2-textarea:focus-visible,
+.swal2-select:focus-visible {
+  outline: none !important;
+  border-color: var(--accent-purple) !important;
+  box-shadow: 0 0 0 3px var(--accent-purple-shadow) !important;
+} */
+
+/* Radio Button Styling (for Choice/Import Popups) */
+.choice-popup .swal2-radio,
+.import-mode-popup .swal2-radio {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em !important;
+  padding: 1em 0 0 0 !important;
+}
+
+.choice-popup .swal2-radio label,
+.import-mode-popup .swal2-radio label {
+  display: block;
+  background-color: var(--button-bg);
+  border: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+  padding: 1em 1.2em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.05em;
+  box-shadow: 0 2px 4px var(--shadow-primary);
+}
+
+.choice-popup .swal2-radio input,
+.import-mode-popup .swal2-radio input {
+  display: none;
+}
+
+.choice-popup .swal2-radio label:hover,
+.import-mode-popup .swal2-radio label:hover {
+  border-color: var(--border-secondary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.swal2-radio label:has(input:checked) {
+  color: var(--accent-purple-text) !important;
+  background-color: var(--accent-purple) !important;
+  border-color: var(--accent-purple) !important;
+}
+
+.swal2-radio label:has(input:checked):hover {
+  background-color: var(--accent-purple-hover) !important;
+  border-color: var(--accent-purple-hover) !important;
+}
+
+/* Details Popup Container & Inputs */
+.swal-details-content {
+  background-color: var(--bg-secondary) !important;
+  padding: 1em 1.2em !important;
+  border-radius: 8px !important;
+  margin: 0 auto 1.5em auto !important;
+  text-align: left !important;
+  border: 1px solid var(--border-primary);
+}
+
 .detail-row {
   display: grid;
-  grid-template-columns: max-content 1fr; /* Label takes its content size, value takes rest */
-  gap: 10px; /* Space between label and value */
-  align-items: center; /* Vertically align items in the row */
-  margin-bottom: 0.8em; /* Space between rows */
+  grid-template-columns: max-content 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 0.8em;
 }
+
 .detail-row:last-child {
-    margin-bottom: 0; /* No margin on the last row */
+  margin-bottom: 0;
 }
 
-/* Labels (Strong tags within rows) */
-.details-popup .swal-details-content .detail-row strong {
-    color: #aaa;
-    font-weight: 600;
-    text-align: left; /* Or 'right' if preferred */
-    white-space: nowrap; /* Prevent label wrapping */
-    /* --- REMOVED min-width, display, margin-right --- */
+.detail-row strong {
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
-/* Values (Content in the second column of the grid row) */
-.details-popup .swal-details-content .detail-row > *:nth-child(2) { /* Target the second child (value column) */
-    color: #ffffff;
-    font-weight: 500;
-    word-break: break-word; /* Allow long values to wrap */
+.detail-row>span {
+  color: var(--text-primary);
+  font-weight: 500;
+  word-break: break-word;
 }
 
-/* Styling for inputs/spans specifically in the value column */
-.details-popup .swal-details-content .detail-row input[type="number"] {
-    width: 60px; /* Keep specific width for number inputs */
-    padding: 3px 6px;
-    font-size: 0.95em;
-    color: #eee;
-    background-color: #444;
-    border: 1px solid #555;
-    border-radius: 4px;
-    text-align: center;
-    margin-left: 0; /* Remove potential inherited margin */
-    -moz-appearance: textfield;
-    appearance: textfield;
-    display: inline-block; /* Allow inline display with other elements */
-    vertical-align: middle; /* Align with text/spans */
+.swal-details-content input[type="number"] {
+  width: 65px !important;
+  padding: 0.5em !important;
+  text-align: center;
+  margin: 0 !important;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-secondary) !important;
+  border-radius: 4px !important;
+  font-size: 1em !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s;
 }
-.details-popup .swal-details-content .detail-row input[type="number"]::-webkit-outer-spin-button,
-.details-popup .swal-details-content .detail-row input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none; margin: 0;
-}
-.details-popup .swal-details-content .detail-row input[type="number"]:focus {
-    outline: none; border-color: var(--swal-primary-color); background-color: #555;
-}
-.details-popup .swal-details-content .detail-row input[type="number"]:disabled {
-    background-color: #3a3a3a !important; cursor: not-allowed; opacity: 0.6;
-}
-.details-popup .swal-details-content .detail-row input[type="checkbox"] {
-    margin-left: 5px;
-    vertical-align: middle;
-    /* Add more checkbox styles if needed */
-}
-/* Style for the " / Total" part */
-.details-popup .swal-details-content .detail-row .episodes-separator,
-.details-popup .swal-details-content .detail-row .episodes-total-simple {
-    display: inline-block;
-    margin-left: 5px;
-    vertical-align: middle;
-    color: #bbb; /* Lighter color for total */
-}
-/* --- END NEW / MODIFIED ROW STYLING --- */
+
+/* --- THIS IS THE FIX: Replaced :focus with :focus-visible --- */
+/* .swal-details-content input[type="number"]:focus-visible {
+  outline: none !important;
+  border-color: var(--accent-purple) !important;
+  box-shadow: 0 0 0 2px var(--accent-purple-shadow) !important;
+} */
 
 
-/* Actions/Buttons (Below Info Square) */
-.details-popup .swal2-actions {
-  margin-top: 0 !important; /* Remove space above buttons */
-  gap: 0.9em;
+.swal-details-content input[type="number"]::-webkit-outer-spin-button,
+.swal-details-content input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.swal-details-content input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.swal-add-anime-popup .swal-add-html-container {
   display: flex;
-  justify-content: flex-end; /* Align buttons right */
-  flex-wrap: wrap;
-  padding-top: 1em; /* Space above buttons */
-  border-top: none; /* Remove top border */
+  flex-direction: column;
+  gap: 1em;
+  text-align: left;
 }
-/* General Button Styles */
-.swal2-confirm, .swal2-cancel, .swal2-deny { border-radius: 6px !important; padding: 0.75em 1.6em !important; font-size: 0.95em !important; font-weight: 600 !important; border: none !important; transition: transform 0.15s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); }
-.swal2-confirm:hover, .swal2-cancel:hover, .swal2-deny:hover { transform: scale(1.03); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); }
-.swal2-confirm:active, .swal2-cancel:active, .swal2-deny:active { transform: scale(0.98); }
-.swal2-confirm { background-color: var(--swal-primary-color) !important; order: 1; } /* Close button */
-.swal2-confirm:hover { background-color: var(--swal-primary-hover) !important; }
-.swal2-cancel { background-color: var(--swal-cancel-color) !important; order: 2; } /* Standard Cancel */
-.swal2-cancel:hover { background-color: var(--swal-cancel-hover) !important; }
-.swal2-deny { background-color: var(--swal-deny-color) !important; color: white !important; order: 3; } /* Delete button */
-.swal2-deny:hover { background-color: var(--swal-deny-hover) !important; }
 
+.swal-add-anime-popup .swal-input-row {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
 
-/* --- Other Swal Styles --- */
-/* Inputs */
-.swal2-input, .swal2-textarea, .swal2-select { background-color: var(--swal-input-bg) !important; color: #e8e8e8 !important; border: 1px solid var(--swal-border-color) !important; border-radius: 6px !important; margin: 0.8em auto !important; padding: 0.8em 1em !important; font-size: 1em !important; width: calc(100% - 2em) !important; box-sizing: border-box !important; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
-.swal2-input::placeholder, .swal2-textarea::placeholder { color: #999 !important; }
-.swal2-input:focus, .swal2-textarea:focus, .swal2-select:focus { outline: none !important; border-color: var(--swal-primary-color) !important; box-shadow: 0 0 0 3px rgba(68, 136, 255, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2) !important; }
-.swal2-input-label { color: #ccc !important; margin: 0.5em 0 !important; display: block; text-align: left; }
-.swal2-validation-message { background: #5f3f3f !important; color: #ffdddd !important; border: 1px solid #a85151 !important; border-radius: 4px !important; padding: 0.6em 0.8em !important; margin-top: -0.2em !important; margin-bottom: 0.6em !important; font-size: 0.9em !important; text-align: left; }
-/* Import Mode */
-.import-mode-popup .swal2-radio { display: grid !important; grid-template-columns: 1fr; gap: 0.8em !important; justify-items: stretch !important; background-color: rgba(0, 0, 0, 0.15) !important; border: 1px solid rgba(255, 255, 255, 0.1); padding: 1em; border-radius: 8px; margin: 1.2em 0 !important; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4); }
-.import-mode-popup .swal2-radio label { display: block; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.15); color: #ccc; padding: 0.8em 1.2em; border-radius: 6px; cursor: pointer; transition: transform 0.15s ease-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out; text-align: center; font-weight: 500; }
-.swal2-radio input[type="radio"] { display: none; }
-.import-mode-popup .swal2-radio label:hover { background-color: rgba(255, 255, 255, 0.08) !important; border-color: rgba(255, 255, 255, 0.4); transform: translateY(0); color: #fff; box-shadow: none; }
-.import-mode-popup .swal2-radio label.active { color: #ffffff !important; font-weight: 600; transform: translateY(0); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important; }
-.import-mode-popup .swal2-radio label.active.active-merge { border-color: var(--swal-primary-color) !important; }
-.import-mode-popup .swal2-radio label.active.active-overwrite { border-color: var(--swal-deny-color) !important; }
-.import-mode-popup .swal2-radio label.active:hover { transform: translateY(0); filter: brightness(1.15); background-color: rgba(255, 255, 255, 0.08) !important; }
-/* Toast */
-.custom-toast-popup.swal2-popup { background: linear-gradient(to right, #4a4e54, #3e4247) !important; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important; border-radius: 8px !important; border: 1px solid #666; padding: 0.9em 1.2em !important; max-width: 350px !important; width: auto !important; font-size: 0.95em; display: flex !important; align-items: center !important; }
-.custom-toast-popup .swal2-title { font-size: 1.1em !important; color: #f0f0f0 !important; text-align: left !important; margin: 0 !important; padding: 0 !important; border-bottom: none !important; text-shadow: none !important; font-weight: 500 !important; flex-grow: 1; }
-.custom-toast-popup .swal2-timer-progress-bar { background: var(--swal-primary-color) !important; height: 4px !important; border-radius: 0 !important; position: absolute; bottom: 0; left: 0; width: 100%; }
-.custom-toast-popup.swal2-container .swal2-timer-progress-bar-container { border-bottom-left-radius: 8px !important; border-bottom-right-radius: 8px !important; }
-.custom-toast-popup .swal2-close { color: #aaa !important; font-size: 1.5em !important; margin-left: 0.5em; }
-.custom-toast-popup .swal2-close:hover { color: #fff !important; }
-.custom-toast-popup .swal2-icon { margin: 0 0.8em 0 0 !important; font-size: 1.3em !important; flex-shrink: 0; }
-.custom-toast-popup .swal2-actions, .custom-toast-popup .swal2-footer, .custom-toast-popup .swal2-radio { display: none !important; }
-.custom-toast-popup .swal2-html-container { margin: 0 !important; padding: 0 !important; }
-/* Add Manual */
-.swal-add-anime-popup.swal2-popup { width: 650px !important; max-width: 90vw !important; }
-.swal-add-anime-popup .swal-add-html-container { text-align: left; margin-top: 1em !important; }
-.swal-add-anime-popup .swal-input-row { display: flex; gap: 1em; margin-bottom: 1em; align-items: flex-start; }
-.swal-add-anime-popup .swal-input-column { flex: 1; display: flex; flex-direction: column; }
-.swal-add-anime-popup .swal-input-column .swal2-input-label { margin-bottom: 0.4em; text-align: left; display: block; font-size: 0.9em; color: #ccc; font-weight: 500; }
-.swal-add-anime-popup .swal-input-column .swal2-input, .swal-add-anime-popup .swal-input-column .swal2-select { width: 100% !important; margin: 0 !important; box-sizing: border-box; }
-.swal-add-anime-popup .swal-full-width-input { width: 100% !important; box-sizing: border-box; margin-bottom: 1em !important; }
-.swal-add-anime-popup .swal2-label { display: none; }
-/* Add Choice */
-.choice-popup.swal2-popup { width: 450px !important; max-width: 90vw !important; }
-.choice-popup .swal2-radio { display: grid !important; grid-template-columns: 1fr 1fr; gap: 1em !important; justify-items: stretch !important; background-color: transparent !important; border: none; padding: 1em 0 0 0; margin: 0 !important; box-shadow: none; }
-.choice-popup .swal2-radio label { display: block; background-color: #454a51; border: 1px solid #555b61; color: #ccc; padding: 1em 1.2em; border-radius: 6px; cursor: pointer; transition: transform 0.15s ease-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out; text-align: center; font-weight: 500; font-size: 1.05em; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-.choice-popup .swal2-radio input[type="radio"] { display: none; }
-.choice-popup .swal2-radio label:hover { background-color: #5a6066 !important; border-color: #777c81; transform: translateY(-2px); color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-.choice-popup .swal2-radio label.active { color: #ffffff !important; font-weight: 600; transform: translateY(0); box-shadow: inset 0 2px 4px rgba(0,0,0,0.25) !important; background-color: var(--swal-primary-color) !important; border-color: var(--swal-primary-hover) !important; }
-.choice-popup .swal2-radio label.active:hover { filter: brightness(1.1); background-color: var(--swal-primary-color) !important; border-color: var(--swal-primary-hover) !important; }
-/* <-- end comment (.css file)(src/css/sweetalert-theme.css) */
+.swal-add-anime-popup .swal-input-column {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.swal-add-anime-popup .swal2-input-label {
+  margin-bottom: 0.4em;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.swal-add-anime-popup .swal2-input,
+.swal-add-anime-popup .swal2-select {
+  width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.swal-add-anime-popup .swal2-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}

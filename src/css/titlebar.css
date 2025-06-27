@@ -1,128 +1,103 @@
 /* src/css/titlebar.css */
-
 #titlebar {
-  display: block; /* Changed back from flex as drag-region handles layout */
+  display: block;
   position: fixed;
-  height: 32px; /* Use direct value from inspiration */
-  width: calc(100% - 2px); /* Account for body border */
-  padding: 0;
+  height: 32px;
+  width: 100%;
   top: 0;
   left: 0;
-  color: #FFF; /* Inspiration color */
   z-index: 2000;
-  background-color: #1f1f1f; /* Inspiration bg */
-  border-bottom: 1px solid #48545c; /* Inspiration border */
-  user-select: none; /* Added */
-  /* Removed box-shadow, doesn't seem present in inspiration */
-}
-
-.maximized #titlebar {
-  width: 100%;
-  padding: 0;
-}
-
-#titlebar #drag-region {
-  width: 100%;
-  height: 100%; /* Drag region takes full height of titlebar */
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-primary);
+  user-select: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
   -webkit-app-region: drag;
-  display: grid;
-  grid-template-columns: auto 138px; /* Title | Controls */
 }
 
 #window-title {
-  grid-column: 1;
+  position: absolute;
+  left: 8px;
+  top: 0;
+  height: 100%;
   display: flex;
   align-items: center;
-  margin-left: 8px;
   overflow: hidden;
-  font-family: "Segoe UI", sans-serif; /* Inspiration font */
-  font-size: 12px; /* Inspiration size */
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
   white-space: nowrap;
-  /* Color inherited from #titlebar */
+  color: var(--text-primary);
 }
 
-.maximized #window-title {
-  margin-left: 12px;
-}
-
-#window-title span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  line-height: 1.5;
+#window-title-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-left: 10px;
+    font-weight: 600;
 }
 
 #window-controls {
-  display: grid;
-  grid-template-columns: repeat(3, 46px);
-  position: absolute; /* Position controls absolutely */
+  -webkit-app-region: no-drag;
+  position: absolute;
   top: 0;
   right: 0;
-  height: 100%; /* Controls take full height of titlebar */
-  -webkit-app-region: no-drag;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-#window-controls .button {
-  grid-row: 1 / span 1;
+/* --- THIS IS THE FIX: The hover effect is now a smaller pseudo-element --- */
+#window-controls .button, #theme-toggle {
+  position: relative; /* Required for the pseudo-element */
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  user-select: none;
-  transition: background-color 0.1s ease; /* Inspiration transition */
-  /* Remove base button styles that might interfere */
-  border-radius: 0;
+  width: 32px;
+  height: 32px;
   background: none;
   border: none;
-  box-shadow: none;
+  cursor: pointer;
   padding: 0;
-  cursor: default;
+  border-radius: 6px;
+  margin-right: 2px;
 }
 
-#window-controls .icon {
-  width: 10px;
-  height: 10px;
-  /* No filter needed if icons are white */
+/* The pseudo-element that will act as the smaller hover background */
+#window-controls .button::before, #theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px; /* Smaller than the button's 32px width */
+    height: 28px; /* Smaller than the button's 32px height */
+    background-color: var(--bg-tertiary);
+    border-radius: 4px;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.15s ease-in-out;
+    z-index: -1; /* Place it behind the SVG icon */
+}
+
+/* Show the pseudo-element on hover */
+#window-controls .button:hover::before, #theme-toggle:hover::before {
   opacity: 1;
 }
 
-#window-controls .button:hover {
-  background: rgba(255, 255, 255, 0.1); /* Inspiration hover */
+/* The active state can still use the old method for a "pressed" feel */
+#window-controls .button:active, #theme-toggle:active {
+  background: var(--bg-secondary);
 }
 
-#window-controls .button:active {
-  background: rgba(255, 255, 255, 0.2); /* Inspiration active */
+/* Special hover color for the close button's pseudo-element */
+#close-button:hover::before {
+  background-color: var(--icon-close-hover-bg) !important;
 }
 
-#close-button:hover {
-  background: #e81123 !important; /* Inspiration close hover */
-  color: #fff;
+#window-controls .button svg, #theme-toggle svg {
+  stroke: var(--icon-stroke);
 }
 
-#close-button:active {
-  background: #f1707a !important; /* Inspiration close active */
-  color: #fff;
-}
-
-/* Ensure icon stays white on red background */
-#close-button:hover .icon,
-#close-button:active .icon {
-  filter: none; /* Assuming source icons are white */
-  opacity: 1;
-}
-
-#min-button {
-  grid-column: 1;
-}
-
-#max-button,
-#restore-button {
-  grid-column: 2;
-}
-
-#close-button {
-  grid-column: 3;
+#close-button:hover svg {
+    stroke: var(--icon-close-hover-stroke);
 }
 
 #restore-button {
@@ -137,4 +112,19 @@
   display: none;
 }
 
-/* REMOVED #titlebar-content styles as they are not part of this structure */
+#theme-toggle .moon-icon { 
+    display: none; 
+}
+#theme-toggle .sun-icon svg { 
+    stroke: var(--sun-color); 
+}
+#theme-toggle .moon-icon svg { 
+    stroke: var(--moon-color); 
+}
+
+html[data-theme="dark"] #theme-toggle .sun-icon { 
+    display: none; 
+}
+html[data-theme="dark"] #theme-toggle .moon-icon { 
+    display: block; 
+}

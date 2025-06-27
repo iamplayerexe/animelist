@@ -1,4 +1,3 @@
-// <-- comment (.js file)(src/javascript/swal-dialogs.js)
 // src/javascript/swal-dialogs.js
 const { ipcRenderer } = require('electron');
 const Swal = require('sweetalert2');
@@ -6,16 +5,14 @@ const elements = require('./dom-elements');
 const state = require('./state');
 const { translate, Toast, setButtonSuccess, setButtonError } = require('./utils');
 const { showManualAddDialog } = require('./handlers/manual-add-handler');
-// *** CORRECTED PATH: Sibling directory ***
 const viewManager = require('./view-manager');
 
 let loadCardsFunc;
 
 function setupDialogs(_loadCardsFunc) {
     loadCardsFunc = _loadCardsFunc;
-    state.setLoadCardsFunction?.(loadCardsFunc); // Ensure loadCards function is stored in state
+    state.setLoadCardsFunction?.(loadCardsFunc);
 
-    // --- Add Button Listener (Shows Choice Popup) ---
     elements.addButton?.addEventListener('click', async () => {
         const { value: addMethod } = await Swal.fire({
              title: translate('addAnimeMethodTitle'),
@@ -24,68 +21,26 @@ function setupDialogs(_loadCardsFunc) {
                  'automatic': translate('addAnimeMethodAutomatic'),
                  'manual': translate('addAnimeMethodManual')
              },
-             // --- REMOVED THIS LINE ---
-             // inputValue: 'automatic',
-             // --- END REMOVED LINE ---
-             inputValidator: (value) => !value && translate('swalImportModeValidation'), // Ensure a choice is made
+             inputValidator: (value) => !value && translate('swalImportModeValidation'),
              customClass: {
                  popup: 'swal2-popup choice-popup',
-                 radio: 'swal2-radio choice-radio',
+                 radio: 'swal2-radio',
+                 label: 'swal2-radio-label'
              },
-             confirmButtonText: translate('autoAddContinue'),
              showCancelButton: true,
+             confirmButtonText: translate('autoAddContinue'),
              cancelButtonText: translate('swalCancelButton'),
-             confirmButtonColor: '#4488FF', // Swapped from deny
-             cancelButtonColor: '#6c757d',
-             background: '#333',
-             color: '#FFF',
-             didOpen: () => {
-                  // Style the radio buttons to look like selectable boxes
-                  const popup = Swal.getPopup(); if (!popup) return;
-                  const radioContainer = popup.querySelector('.swal2-radio'); if (!radioContainer) return;
-                  const radioLabels = radioContainer.querySelectorAll('label');
-                  const radioInputs = radioContainer.querySelectorAll('input[type="radio"]');
-
-                  const updateLabelStyles = (selectedValue) => {
-                      radioLabels.forEach(label => {
-                           // Find the input associated with this label more reliably
-                           const input = label.querySelector('input[type="radio"]') || popup.querySelector(`input[type="radio"][id="${label.getAttribute('for')}"]`) || popup.querySelector(`input[type="radio"][value="${label.textContent.trim()}"]`); // Fallbacks
-                           const isSelected = input && input.value === selectedValue;
-                           label.classList.toggle('active', isSelected);
-                      });
-                  };
-
-                  // Initially, no value is selected, so don't highlight anything
-                  // const initialValue = popup.querySelector('input[type="radio"]:checked')?.value; // REMOVED initial check
-                  // updateLabelStyles(initialValue); // REMOVED initial styling call
-
-                  radioInputs.forEach(input => {
-                      input.addEventListener('change', (event) => {
-                          updateLabelStyles(event.target.value); // Update styles on change
-                      });
-                  });
-              }
+             // --- THIS IS THE FIX: Disabled automatic focus ---
+             focusConfirm: false,
          });
 
         if (addMethod === 'automatic') {
-            console.log("Automatic Add selected. Switching view...");
-             if (window.electronAPI?.clearAutoAddSelections) { // Clear previous auto-add state if switching
-                 window.electronAPI.clearAutoAddSelections();
-             }
-            viewManager.switchView('auto-add-view'); // Switch to the auto-add view
+            viewManager.switchView('auto-add-view');
         } else if (addMethod === 'manual') {
-            console.log("Manual Add selected. Showing manual dialog...");
-            showManualAddDialog(); // Show the detailed manual add form
-        } else {
-             console.log("Add Anime choice cancelled.");
-             if (window.electronAPI?.clearAutoAddSelections) { // Also clear if cancelled
-                 window.electronAPI.clearAutoAddSelections();
-             }
+            showManualAddDialog();
         }
     });
 
-
-    // --- Import Button Listener ---
     elements.importButton?.addEventListener('click', async () => {
         const dialogResult = await ipcRenderer.invoke('openImportDialog');
         if (dialogResult.canceled || !dialogResult.filePaths?.length) {
@@ -93,7 +48,7 @@ function setupDialogs(_loadCardsFunc) {
             return;
         }
         const filePath = dialogResult.filePaths[0];
-        const fileName = filePath.split(/[\\/]/).pop(); // Extract filename
+        const fileName = filePath.split(/[\\/]/).pop();
 
         const { value: importMode } = await Swal.fire({
              title: translate('swalImportModeTitle'),
@@ -105,106 +60,73 @@ function setupDialogs(_loadCardsFunc) {
                  'merge': translate('swalImportModeMerge')
              },
              inputValidator: (value) => !value && translate('swalImportModeValidation'),
+             customClass: {
+                 popup: 'swal2-popup import-mode-popup choice-popup',
+                 radio: 'swal2-radio',
+                 label: 'swal2-radio-label',
+             },
              confirmButtonText: translate('swalImportModeNext'),
              cancelButtonText: translate('swalCancelButton'),
              showCancelButton: true,
-             confirmButtonColor: '#4488FF',
-             cancelButtonColor: '#6c757d',
-             background: '#333',
-             color: '#FFF',
-             customClass: {
-                 popup: 'swal2-popup import-mode-popup', // Add specific class if needed
-                 radio: 'swal2-radio'
-             },
-              didOpen: () => {
-                  // Similar styling logic for import mode radio buttons if needed
-                  const popup = Swal.getPopup(); if (!popup) return;
-                  const radioContainer = popup.querySelector('.swal2-radio'); if (!radioContainer) return;
-                  const radioLabels = radioContainer.querySelectorAll('label');
-                  const radioInputs = radioContainer.querySelectorAll('input[type="radio"]');
-                   const updateLabelStyles = (selectedValue) => {
-                      radioLabels.forEach(label => {
-                          const input = label.querySelector('input[type="radio"]');
-                          const isSelected = input && input.value === selectedValue;
-                          label.classList.toggle('active', isSelected);
-                          // Optional: Add mode-specific active classes if defined in CSS
-                          label.classList.toggle('active-overwrite', isSelected && input.value === 'overwrite');
-                          label.classList.toggle('active-merge', isSelected && input.value === 'merge');
-                      });
-                  };
-                   radioInputs.forEach(input => { input.addEventListener('change', (event) => { updateLabelStyles(event.target.value); }); });
-                   // No initial value needed here either if you don't want pre-selection
-              }
+             // --- THIS IS THE FIX: Disabled automatic focus ---
+             focusConfirm: false,
          });
 
         if (importMode) {
-             const confirmTextKey = importMode === 'overwrite' ? 'swalImportConfirmOverwrite' : 'swalImportConfirmMerge';
-             const confirmButtonColor = importMode === 'overwrite' ? '#d33' : '#4488FF'; // Red for overwrite
-             const confirmButtonLabelKey = importMode === 'overwrite' ? 'swalImportConfirmButtonOverwrite' : 'swalImportConfirmButtonMerge';
+            const confirmTextKey = importMode === 'overwrite' ? 'swalImportConfirmOverwrite' : 'swalImportConfirmMerge';
+            const confirmButtonText = translate(importMode === 'overwrite' ? 'swalImportConfirmButtonOverwrite' : 'swalImportConfirmButtonMerge');
 
             Swal.fire({
                 title: translate('swalImportConfirmTitle'),
                 text: translate(confirmTextKey),
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: translate(confirmButtonLabelKey),
+                confirmButtonText: confirmButtonText,
                 cancelButtonText: translate('swalCancelButton'),
-                confirmButtonColor: confirmButtonColor,
-                cancelButtonColor: '#6c757d',
-                background: '#333', color: '#FFF',
-                customClass: { popup: 'swal2-popup' }
+                customClass: { 
+                    popup: 'swal2-popup import-final-confirm-popup' 
+                },
+                // --- THIS IS THE FIX: Disabled automatic focus ---
+                focusConfirm: false,
             }).then(async (confirmationResult) => {
                 if (confirmationResult.isConfirmed) {
-                    const button = elements.importButton; // Get button for feedback
+                    const button = elements.importButton;
                     const otherButtons = [elements.exportButton, elements.clearDataButton];
                     try {
-                        button.disabled = true; // Disable during operation
+                        button.disabled = true;
                         otherButtons.forEach(b => b.disabled = true);
                         const processingToast = Toast.fire({ icon: 'info', title: translate('toastImporting'), timer: null, showConfirmButton: false, timerProgressBar: false });
 
                         const importResult = await ipcRenderer.invoke('importData', filePath, importMode);
 
-                        processingToast.close(); // Close processing toast
+                        processingToast.close();
 
                         if (importResult.success) {
                             Toast.fire({ icon: 'success', title: translate('toastImportSuccess', { count: importResult.count }) });
-                            // Reset filters and reload cards after successful import
                             state.setCurrentStatusFilter('All');
                             state.setCurrentTypeFilter('All');
                             const typeSelect = document.getElementById('type-filter-select');
-                            if(typeSelect) typeSelect.value = 'All'; // Reset dropdown UI
-                            const currentLoadCards = state.getLoadCardsFunction?.(); // Use getter
-                            if(currentLoadCards) setTimeout(() => currentLoadCards(), 0); // Reload cards
-                            // Note: We might still be in the 'data-management-view', viewManager handles active button state
+                            if(typeSelect) typeSelect.value = 'All';
+                            const currentLoadCards = state.getLoadCardsFunction?.();
+                            if(currentLoadCards) setTimeout(() => currentLoadCards(), 0);
                         } else {
                             const errorMsg = translate(importResult.error, { fallback: importResult.error || 'toastImportError' });
-                            // setButtonError(button, errorMsg); // Show error on button (optional)
-                            Swal.fire({ title: translate('swalImportErrorTitle'), text: errorMsg, icon: 'error', background: '#333', color: '#FFF', confirmButtonColor: '#4488FF', customClass: { popup: 'swal2-popup' } });
+                            Swal.fire({ title: translate('swalImportErrorTitle'), text: errorMsg, icon: 'error', customClass: { popup: 'swal2-popup' } });
                         }
                     } catch (error) {
                         console.error("Import IPC Error:", error);
                         const errorMsg = translate('swalImportErrorIPCText');
-                        // setButtonError(button, errorMsg); // Show error on button (optional)
-                        Swal.fire({ title: translate('swalImportErrorIPC'), text: errorMsg, icon: 'error', background: '#333', color: '#FFF', confirmButtonColor: '#4488FF', customClass: { popup: 'swal2-popup' } });
-                        const pt = Swal.getToast(); if (pt) pt.close(); // Close processing toast if still open
+                        Swal.fire({ title: translate('swalImportErrorIPC'), text: errorMsg, icon: 'error', customClass: { popup: 'swal2-popup' } });
+                        const pt = Swal.getToast(); if (pt) pt.close();
                     } finally {
-                        // Re-enable buttons regardless of success/failure, unless success feedback is timed
-                        // if (!button.classList.contains('success')) button.disabled = false;
-                         button.disabled = false; // Simplier: just re-enable
+                         button.disabled = false;
                          otherButtons.forEach(b => b.disabled = false);
                     }
-                } else {
-                     // User cancelled the confirmation step
-                     Toast.fire({ icon: 'info', title: translate('toastImportCancelled') });
-                 }
-             });
-        } else {
-             // User cancelled the mode selection step
-             Toast.fire({ icon: 'info', title: translate('toastImportCancelled') });
+                }
+            });
         }
-     });
+    });
 
-    // --- Export Button Listener ---
     elements.exportButton?.addEventListener('click', async () => {
          const button = elements.exportButton;
          const otherButtons = [elements.importButton, elements.clearDataButton];
@@ -213,37 +135,34 @@ function setupDialogs(_loadCardsFunc) {
              otherButtons.forEach(b => b.disabled = true);
              const result = await ipcRenderer.invoke('openExportDialog');
              if (result.success) {
-                 setButtonSuccess(button, 'toastExportSuccess'); // Timed success feedback
-             } else if (!result.canceled) { // Only show error if it wasn't a cancellation
+                 setButtonSuccess(button, 'toastExportSuccess');
+             } else if (!result.canceled) {
                  const errorMsg = translate(result.error, { fallback: result.error || 'toastExportError' });
-                 setButtonError(button, errorMsg); // Timed error feedback
+                 setButtonError(button, errorMsg);
              } else {
                  Toast.fire({ icon: 'info', title: translate('toastExportCancelled') });
-                 button.disabled = false; // Re-enable immediately if cancelled
+                 button.disabled = false;
              }
          } catch (error) {
              console.error("Export IPC Error:", error);
              const errorMsg = translate('toastErrorIPC');
-             setButtonError(button, errorMsg); // Show timed error
+             setButtonError(button, errorMsg);
          } finally {
-             // Re-enable other buttons (export button handled by setButtonSuccess/Error timers or cancellation)
              otherButtons.forEach(b => b.disabled = false);
          }
      });
 
-    // --- Clear Data Button Listener ---
     elements.clearDataButton?.addEventListener('click', () => {
          Swal.fire({
              title: translate('swalClearConfirmTitle'),
              html: translate('swalClearConfirmHtml'),
-             icon: 'error', // Use error icon for high danger
-             background: '#333', color: '#FFF',
+             icon: 'warning',
              showCancelButton: true,
-             confirmButtonColor: '#d33', // Red confirm button
-             cancelButtonColor: '#6c757d',
              confirmButtonText: translate('swalClearConfirmButton'),
              cancelButtonText: translate('swalCancelButton'),
-             customClass: { popup: 'swal2-popup' }
+             customClass: { popup: 'swal2-popup clear-data-popup' },
+             // --- THIS IS THE FIX: Disabled automatic focus ---
+             focusConfirm: false,
          }).then(async (result) => {
              if (result.isConfirmed) {
                  const button = elements.clearDataButton;
@@ -257,34 +176,28 @@ function setupDialogs(_loadCardsFunc) {
 
                      if (clearResult.success) {
                          Toast.fire({ icon: 'success', title: translate('toastClearSuccess') });
-                         // Reset filters and reload cards
                          state.setCurrentStatusFilter('All');
                          state.setCurrentTypeFilter('All');
                          const typeSelect = document.getElementById('type-filter-select');
                          if(typeSelect) typeSelect.value = 'All';
                          const currentLoadCards = state.getLoadCardsFunction?.();
                          if(currentLoadCards) setTimeout(() => currentLoadCards(), 0);
-                         // Optionally switch back to cards view? Or leave in data view? Assuming leave.
                      } else {
                          const errorMsg = translate(clearResult.error, { fallback: clearResult.error || 'toastClearError' });
-                         setButtonError(button, errorMsg); // Show timed error
+                         setButtonError(button, errorMsg);
                      }
                  } catch (error) {
                      console.error("Clear Data IPC Error:", error);
                      const errorMsg = translate('toastErrorIPC');
-                     setButtonError(button, errorMsg); // Show timed error
-                     const pt = Swal.getToast(); if (pt) pt.close(); // Close processing toast if still open
+                     setButtonError(button, errorMsg);
+                     const pt = Swal.getToast(); if (pt) pt.close();
                  } finally {
-                     // Re-enable buttons (clear button handled by setButtonError timer)
-                     if(!button.classList.contains('error')) button.disabled = false; // Re-enable if no error
+                     if(!button.classList.contains('error')) button.disabled = false;
                      otherButtons.forEach(b => b.disabled = false);
                  }
              }
          });
      });
-
-    console.log("Dialogs setup complete.");
 }
 
 module.exports = { setupDialogs };
-// <-- end comment (.js file)(src/javascript/swal-dialogs.js)

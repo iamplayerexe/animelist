@@ -3,13 +3,18 @@ const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
 const { initializeDataHandlers } = require('./src/main-process/anime-data-handler');
 
+// --- THIS IS THE FIX: Development Mode Toggle ---
+// Set to 'true' when running with `npm start` to bypass the launcher check.
+// Set to 'false' before creating a production build.
+const IN_DEVELOPMENT_MODE = true;
+
 // This argument will be passed by the launcher when it starts the app.
 const LAUNCHER_ARG = '--launched-by-xutron';
-// This is the custom protocol the launcher will register.
 const LAUNCHER_PROTOCOL_URI = 'xutron-launcher://relaunch?appId=animelist';
 
 // Check if the app was launched directly in production
-if (process.env.NODE_ENV !== 'development' && !process.argv.includes(LAUNCHER_ARG)) {
+// MODIFIED: This condition now uses the new boolean toggle.
+if (!IN_DEVELOPMENT_MODE && !process.argv.includes(LAUNCHER_ARG)) {
     // If not launched by the launcher, try to open the launcher via its protocol and quit.
     console.log('Not launched by XutronCore Launcher. Attempting to open launcher...');
     try {
