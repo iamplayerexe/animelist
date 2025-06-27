@@ -28,7 +28,6 @@ async function updateWindowTitleWithVersion() {
         const appVersion = await ipcRenderer.invoke('get-app-version');
         console.log(`Renderer: Received app version: ${appVersion}`);
         if (appVersion) {
-            // --- THIS IS THE FIX: Display only the version number ---
             titleSpan.textContent = `v${appVersion}`;
         } else {
             titleSpan.textContent = baseTitle;
@@ -46,18 +45,15 @@ window.addEventListener('DOMContentLoaded', async () => {
         globalLoadCards = loadCards;
         state.setLoadCardsFunction?.(globalLoadCards);
 
-        // --- THIS IS THE FIX: Theme setup and toggle logic ---
+        // --- THIS IS THE FIX: The initial theme application is removed from here. ---
+        // The inline script in index.html now handles this.
         const themeToggle = document.getElementById('theme-toggle');
         const applyTheme = (theme) => {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
         };
 
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
-
+        // The event listener for the button remains to allow user toggling.
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
