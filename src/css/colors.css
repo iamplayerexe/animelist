@@ -76,9 +76,9 @@ html[data-theme="dark"] {
   --shadow-primary: rgba(0, 0, 0, 0.25);
   
   /* --- Components --- */
-  --scrollbar-track: #2a2e33;
-  --scrollbar-thumb: #555;
-  --scrollbar-thumb-hover: #777;
+  --scrollbar-track: #262e52;
+  --scrollbar-thumb: #1f2937;
+  --scrollbar-thumb-hover: #374151;
   --dropdown-bg: #1f2937;
   --dropdown-hover-bg: #374151;
   --button-bg: #374151;
